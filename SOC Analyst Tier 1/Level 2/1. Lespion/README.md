@@ -1,4 +1,4 @@
-# Scenario & Objective
+0# Scenario & Objective
 
 You have been tasked by a client whose network was compromised and brought offline to investigate the incident and determine the attacker's identity.
 
@@ -9,7 +9,12 @@ I was provided a folder contain 3 information: Link to her github, office.jpg an
 - **Category**: Threat Intel
 - **Tools**: Google
 # Overview
-(5 Ws: Who, What, When, Where, Why)
+
+The investigation reveals that the insider threat is an employee with the online username **EMarseille99**, who works at the company's office in **Birmingham, England**.
+
+The incident began when the client's network was compromised and went offline. Forensic analysis of the insider's public GitHub repository, `Project-Build---Custom-Login-Page`, uncovered a leaked API key and the plaintext password **PicassoBaguette99**. The insider also collected various hacking tools on GitHub, including the **Xmrig** cryptocurrency miner.
+
+Using OSINT techniques, the investigator traced the insider's social media presence across platforms like GitHub, **Steam**, and Instagram. Her Instagram posts showed that she traveled to **Singapore** (Marina Bay Sands) for a holiday, while her family lives in **Dubai**. Finally, surveillance tracked the suspect to an apartment near the University of Notre Dame in **Indiana, USA**.
 # Analysis
 
 From the repositories in the Emarseille99 github, I found the list of her repositories:
@@ -31,7 +36,7 @@ From the repositories in the Emarseille99 github, I found the list of her reposi
 
 But only `Project-Build---Custom-Login-Page` repo has description as `Working`. Other repositories forked from some where so that is not her project. 
 <p align="center">
-  <img src="Image 1 - Sensitive project public.webp" alt="Sensitive project public" /> <br />
+  <img src="./Assets/Image 1 - Sensitive project public.webp" alt="Sensitive project public" /> <br />
   <em>Image 1: Sensitive project public</em>
 </p>
 When I check the `Login Page.js` of the project, I found the `API Key = aJFRaLHjMXvYZgLPwiJkroYLGRkNBW`. 
