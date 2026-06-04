@@ -6,7 +6,10 @@ Our intrusion detection system has alerted us to suspicious behavior on a workst
 - **Tools**: Volatility 3, VirusTotal, IP Location
 
 ## Overview
-(Conclude your report with a summary of the main finding of you analysis --> 5 Ws: Who, What, When, Where, Why)
+
+In `02 - 01 - 2024`, there are a suspicious process run on the host  `OneDrive.exe` and  a malicious process `ChromeSetup.exe`. 
+
+The malicious process `ChromeSetup.exe` connect to C2 server `58.64.204.181` that come from `Hong Kong` at about `19:48`.
 
 # Analysis
 
@@ -30,6 +33,7 @@ I want to verify these files, so I use plugin `windows.dumpfiles` to know full n
 - ChromeSetup.exe:
 	- Filename: `file.0xca82b85325a0.0xca82b7e06c80.ImageSectionObject.ChromeSetup.exe.img`
 	- SHA256 hash value: `1ac890f5fa78c857de42a112983357b0892537b73223d7ec1e1f43f8fc6b7496`
+
 - OneDrive.exe:
 	- Filename: `file.0xca82b7c72ce0.0xca82b7ecbda0.ImageSectionObject.OneDrive.exe.img`
 	- SHA256 hash value: `ae1800f077e588d2e123f00f5a0518e2f8a2e58defaee9e81a2c7a89332d71dc`
