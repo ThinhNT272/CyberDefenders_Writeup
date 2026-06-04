@@ -62,6 +62,8 @@ Then `3425.exe` download other file:
 - `ff.exe` from `94.63.149.152`.
 - `kp.exe` from `60.190.223.75`.
 - `client.exe`, `fjuivgfhurew.exe` and `chooseee.exe` from `195.88.191.59`.
+
+Then I want to know what did these files do in the server but I cannot find any thing special.
 # Answer the Questions
 
 **Q1: During the investigation of network traffic, unusual patterns of activity were observed in Suricata logs, suggesting potential unauthorized access. One external IP address initiated access attempts and was later seen downloading a suspicious executable file. This activity strongly indicates the origin of the attack. What is the IP address from which the initial unauthorized access originated?**
