@@ -1,4 +1,4 @@
-This is my writeup when doing CyberDefenders labs to practice SOC analys skill. In general, me write up will follow the structure as below:
+This is my writeup when doing CyberDefenders labs to practice SOC analys skill. In general, my write up will follow the structure as below:
 
 # Scenario & Objective
 
