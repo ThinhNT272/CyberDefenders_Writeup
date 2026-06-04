@@ -32,9 +32,8 @@ After searching, I found the packet no 132. The `10.0.0.130:49696` connected to 
   <em>Image 3: Initial access</em>
 </p>
 
-> [!note]
 > The `IPC$` (Inter-Process Communication) share or also known as a null session connection is a hidden, virtual administrative share in Windows used for communication between network programs and remote administration. It does not map to a physical folder on the hard drive but acts as a conduit for to allow processes to interact across machine.
-> 
+
 > The `ADMIN$` folder is a hidden, default administrative share in Windows that points directly to the system root directory (typically `C:\Windows`). Used primarily by network administrators, it enables remote management, allowing them to access system files, manage configurations, and deploy software over a network without physical access to the machine
 
 Then in the packet 140, `10.0.0.130` request to open the `ADMIN$` folder. This is an exploratory step. `10.0.0.130`, attacker want to make sure the `ADMIN$` folder exist. 
@@ -61,7 +60,6 @@ After attacker closed the `PSEXESVC.exe` file, I found the DCERPC protocol from 
   <em>Image 7: Run the PSEXECSVC.exe</em>
 </p>
 
-> [!note]
 > DCERPC is a networking framework that allows a computer program to execute procedures on a remote server as if they were local
 
 It proved that the attacker ran the `PSEXECSVC.exe` program by using DCE/RPC protocol.
