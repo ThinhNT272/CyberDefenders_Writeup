@@ -4,6 +4,7 @@ We're currently in the midst of a murder investigation, and we've obtained the v
 
 - **Category**: Endpoint Forensics
 - **Tools**: ALEAPP, DB Browser for SQLite
+
 ## Overview
 
 The victim, whose identity is tied to the contacts and accounts on his Android phone, was deeply involved in online trading through the **Olymp Trade** application. His trading addiction led him to invest all of his money and debt - owing **250,000 EGP** to an individual named **Shady Wahab**.
@@ -11,7 +12,8 @@ The victim, whose identity is tied to the contacts and accounts on his Android p
 On **September 20, 2023**, the victim quietly left his residence without informing anyone. Location data from Google Maps on his phone revealed that he traveled to **The Nile Ritz-Carlton** hotel in Cairo, where he had reserved a room for 10 days. He also had a flight booked from Cairo to **Las Vegas**, with a cached boarding pass found in the phone's image manager.
 
 Discord chat logs further revealed that the victim had arranged to meet a friend at **The Mob Museum** in Las Vegas.
-# Analysis
+
+# Answer the Questions
 
 **Q1: Based on the accounts of the witnesses and individuals close to the victim, it has become clear that the victim was interested in trading. This has led him to invest all of his money and acquire debt. Can you identify the `SHA256` of the trading application the victim primarily used on his phone?**
 

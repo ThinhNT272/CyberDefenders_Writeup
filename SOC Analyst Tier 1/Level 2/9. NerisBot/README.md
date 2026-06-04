@@ -6,11 +6,13 @@ My team has been tasked with analyzing recent network traffic logs to investigat
 
 - **Category**: Threat Hunting
 - **Tools**: Splunk, VirusTotal
+
 ## Overview
 
 On **10/08/2011**, starting at **09:01:40**, unusual network activity was detected on a targeted host (**147.32.84.165**) within a university network. 
 
 The investigation using Splunk and VirusTotal showed that the host was compromised after downloading a malicious executable named **3425.exe** from **nocomcom.com** (IP **195.88.191.59**). Following this initial compromise, the malware used a custom User-Agent (`Download`) to fetch five additional malicious files (including **client.exe**, **chooseee.exe**, and a malicious file disguised as **kx4.txt**). These connections were established with command and control (C2) servers to download second-stage payloads and expand the threat actor's control.
+
 # Analysis
 
 At first, I follow sourcetype `suricata` because it stands out of other `zeek` logs. Then I check event_type field.
@@ -64,6 +66,7 @@ Then `3425.exe` download other file:
 - `client.exe`, `fjuivgfhurew.exe` and `chooseee.exe` from `195.88.191.59`.
 
 Then I want to know what did these files do in the server but I cannot find any thing special.
+
 # Answer the Questions
 
 **Q1: During the investigation of network traffic, unusual patterns of activity were observed in Suricata logs, suggesting potential unauthorized access. One external IP address initiated access attempts and was later seen downloading a suspicious executable file. This activity strongly indicates the origin of the attack. What is the IP address from which the initial unauthorized access originated?**

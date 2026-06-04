@@ -4,12 +4,14 @@ The accountant at the company received an email titled "Urgent New Order" from a
 
 - **Category**: Threat Intel
 - **Tools**: VirusTotal, ANY.RUN
+
 ## Overview
 
 The malicious PPT file, created on `2022-09-28 17:40:46 UTC`, executed the malware upon opening. Post-infection, the malware first requested the `sqlite3.dll` library - used to read browser credential databases - and communicated with its C2 server at `http://171.22.28.221/5c06c05b7b34e8e6.php`. It used **RC4 encryption** (key: `5329514621441247975720749009`) to decrypt its base64-encoded strings and employed credential-stealing techniques categorized under `MITRE ATT&CK T1555` (Credentials from Password Stores).
 
 After successfully exfiltrating the user's data, the malware performed anti-forensic cleanup by deleting all DLL files from `C:\ProgramData` and then self-deleted after a **5s** delay.
-# Analysis
+
+# Answer the Questions
 
 **Q1: Determining the creation time of the malware can provide insights into its origin. What was the time of malware creation?**
 
@@ -26,6 +28,7 @@ I found the information of C2 server that malware connect with in Relation tab, 
   <img src="Image 2 - URL of C2 server that malware connect with.webp" alt="URL of C2 server that malware connect with" /> <br />
   <em>Image 2: URL of C2 server that malware connect with</em>
 </p>
+
 In general, the `.dll` library acts as a local Windows loader (often via hijacking) to establish persistence and evade detection. Attacker often place the malicious `dll` file in an application's path. When the application runs, it loads the malicious `.dll` file instead of the legitimate one (or run both file), allowing the malware to run with the same privileges as the application. 
 
 Meanwhile, The PHP component is typically placed on a web server to act as a backdoor or exfiltrate data. So in this case, my answer is the url [http://171.22.28.221/5c06c05b7b34e8e6.php](https://www.virustotal.com/gui/url/205d797a462e377eb12371364bcb6ee85628f82a99509467c35b9866cf45c36b).
@@ -39,6 +42,7 @@ But to verify that information, I go to File Dropped category from Behavior tab.
   <img src="Image 3 - File Dropped.webp" alt="File Dropped" /> <br />
   <em>Image 3: File Dropped</em>
 </p>
+
 So my answer is `sqlite3.dll`.
 
 **Q4: By examining the provided [Any.run report](https://any.run/report/a040a0af8697e30506218103074c7d6ea77a84ba3ac1ee5efae20f15530a19bb/d55e2294-5377-4a45-b393-f5a8b20f7d44), what RC4 key is used by the malware to decrypt its base64-encoded string?**

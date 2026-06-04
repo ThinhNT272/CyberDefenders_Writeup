@@ -6,6 +6,7 @@ You acquired a disk image and found that Karen uses Linux OS on her machine. Ana
 
 - **Category**: Endpoint Forensics
 - **Tools**: FTK Imager
+
 # Answer the Questions
 
 **Q1: Which Linux distribution is being used on this machine?**

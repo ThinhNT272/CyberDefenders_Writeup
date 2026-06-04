@@ -6,7 +6,10 @@ Your task is to conduct threat intelligence analysis on the phishing infrastruct
 
 - **Category**: Threat Intel
 - **Tools**: VS Code
+
 ## Overview
 (Conclude your report with a summary of the main finding of you analysis --> 5 Ws: Who, What, When, Where, Why)
+
 # Analysis
+
 # Answer the Questions

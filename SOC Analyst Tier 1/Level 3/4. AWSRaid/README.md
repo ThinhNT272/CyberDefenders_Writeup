@@ -4,6 +4,7 @@ Your organization utilizes AWS to host critical data and applications. An incide
 
 - **Category**: Cloud Forensics
 - **Tools**: Splunk
+
 ## Overview
 
 During a security investigation of AWS CloudTrail logs in Splunk, a critical cloud security incident was analyzed. Below is the conclusion of the analysis.
@@ -30,6 +31,7 @@ For more information, at about `07:37 - 09:55`, The attacker initiated the intru
 Then, as I said above, attacker create rogue user called `marketing.mark` and add it into group `Admins` at about `9:59`.
 
 The primary objectives were `data exfiltration` of sensitive information (CAD designs, client contracts, database backups, and customer backups) and `persistence establishment` (creating a backdoor administrator account) to secure unrestricted, stealthy access for future operations.
+
 # Analysis
 
 First, I filter `index=*` to see all fields in the Splunk. Then I know some fileds:
@@ -79,6 +81,7 @@ From evenSource, I find that he mostly access to `s3` and `iam`. After researchi
 </p>
 
 ## What did attacker do in S3
+
 I want to check all actions that he made. So I filter with the command below to see all activities was made by attacker.
 
 ```SPL
@@ -106,6 +109,7 @@ There are 16 eventName and I will briefly describe below:
 | `ListBuckets`                         | 13    | It indicates that an AWS user or service has requested a list of all Amazon S3 buckets associated with your AWS account                                       |
 | `ListObjects`                         | 7     | It represents the API call used to list the contents of an S3 bucket                                                                                          |
 | `PutBucketPublicAccessBlock`          | 1     | It represents an API call made to AWS indicating that a user has created or modified the Block Public Access configuration for an Amazon S3 bucket            |
+
 So, to know what attacker did, I will filter with `eventName="GetObject"`. There are 8 events from `9:55` to `9:57` in `11/02/2023`. Then from requestParameters.key field - which represents the exact S3 object path (file name) that was affected by an AWS API request, such as uploading, deleting, or downloading a file - I find 8 files that attacker try to get.
 <p align="center">
 	  <img src="./Assets/Image 7 - requestParameters.key of attacker in S3.webp" alt="requestParameters.key of attacker in S3" /> <br />
@@ -136,6 +140,7 @@ From the image above, I know that he read 6 files and downloaded 2 files. So whi
 | `9:56:50.00` | Read                    | Contract_Termination_Letter_Client.pdf | contracts-data67988444.s3.us-east-1.amazonaws.com             |
 | `9:57:04.00` | Read                    | Configuration_Backup_Server2.zip       | backup-and-restore98825501.s3.us-east-1.amazonaws.com         |
 | `9:57:11.00` | Read                    | secrets_vault_dump.bak                 | backup-and-restore98825501.s3.us-east-1.amazonaws.com         |
+
 ## What did attacker do in IAM
 
 When I filter with `eventSource="iam.amazonaws.com"`, there are 179 events from `9:58:44` to `9:59:53`. Similar as in `s3`, I check eventName field to see what did he do in this host. There are 18 eventName with briefly description as below.
@@ -160,6 +165,7 @@ When I filter with `eventSource="iam.amazonaws.com"`, there are 179 events from 
 | ListPolicies              | 4     | List of all IAM policies available in the AWS account                                                                  |
 | ListSigningCertificates   | 30    | List the signing certificates associated with a specific IAM user                                                      |
 | ListUsers                 | 3     | List all IAM users created within the entire AWS account                                                               |
+
 So, through `CreateUser` field, I know that at `9:59:33`, user `helpdesk.luke` create a new user called `marketing.mark` and set password at `9:59:38`. 
 <p align="center">
 	  <img src="./Assets/Image 10.1 - Attacker create new user.webp" alt="Attacker create new user" /> <br/>
@@ -174,6 +180,7 @@ Then, at `9:59:38`, attacker add user `marketing.mark` into group `Admins`.
 </p>
 
 Then I use this SPL `index=* "userIdentity.userName"="marketing.mark"`. But I don't find any activities of user `marketing.mark` in the system. So maybe this account is for persistent attack.
+
 ## How did attacker get the resources
 
 In `s3`, I check for `eventName="GetAccountPublicAccessBlock"`. With this field, attacker want to check the block access feature on the account is enable or not. 
@@ -183,6 +190,7 @@ It is 10 events and sadly, all 10 events appear `errorCode=NoSuchPublicAccessBlo
 	  <img src="./Assets/Image 12 - Misconfiguration of security in account.webp" alt="Misconfiguration of security in account" /> <br />
   <em>Image 12: Misconfiguration of security in account</em>
 </p>
+
 This means, the account `helpdesk.luke` does not have block public access configurations. Which means, if there is any public host in the system, this account can access into it. 
 
 At this point, I think attacker will check for any public bucket so that he can access to it. But when I check all other eventName in `s3`,I don't see any evidence prove that other bucket is public. 
@@ -194,6 +202,7 @@ Then, in switch to check in `iam`, But I also don not find anything special in h
 </p>
 
 However, based on the information I have, I can answer the questions below.
+
 # Answer the Questions
 
 **Q1: Knowing which user account was compromised is essential for understanding the attacker's initial entry point into the environment. What is the username of the compromised user?**

@@ -8,11 +8,13 @@ SHA256 value (205-DanaBot.pcap): d7624c8b2c987abb196ee8eddc8da93b19bbc51abbf0aaa
 
 - **Category**: Network Forensics
 - **Tools**: Wireshark, VirusTotal, ANY.RUN, Network Miner
+
 # Overview
 
 On **February 14, 2024**, at **23:25**, a host on the local network (**10.2.14.1**) was compromised after a user made a mistyped DNS query. The host connected to a malicious server at **62.173.142.148** and downloaded a JavaScript file named **allegato_708.js**.
 
 This malicious script was executed using **Wscript.Shell.exe**, which then contacted the external domain `soundata.top` to download a second-stage payload, **resources.dll**. The execution of this DLL allowed the attacker to gather system information, steal sensitive credentials, and compromise the network.
+
 # Analysis
 
 This PCAP file records network traffic from `23:25:53` to `23:50:17` on `2024-02-14`, contain `13 900` packets with `39` different IP addresses. The main type of network traffic is `TLS` with `6.8%` of all packets.
@@ -93,6 +95,7 @@ SHA256: 2597322a49a6252445ca4c8d713320b238113b3b8fd8a2d6fc1088a5934cee0e
 MD5: e758e07113016aca55d9eda2b0ffeebe
 
 This malware can gather credential and environment information, copy, create or delete file, terminate process or create thread.
+
 # Answer the Questions
 
 **Q1: Which IP address was used by the attacker during the initial access?**

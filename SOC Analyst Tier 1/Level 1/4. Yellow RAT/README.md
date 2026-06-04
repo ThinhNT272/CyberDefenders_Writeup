@@ -6,10 +6,12 @@ During a regular IT security check at GlobalTech Industries, abnormal network tr
 - **Tools**: VirusTotal, Red Canary
 
 Before do the lab, we need to know what is RAT? Basically, a Remote Access Trojan (RAT) is malicious software that gives attackers full administrative control over a victim’s computer or server without their consent.
+
 ## Overview
 
 The malware `Yellow Cockatoo RAT`, compiled on `2020-09-24 18:26:47 UTC` and first submitted to VirusTotal on `2020-10-15 02:47:37 UTC`, operated as a DLL file with the common filename `111bc461-1ca8-43c6-97ed-911e0e69fdf8.dll`. Upon infection, it dropped a persistence file named `solarmarker.dat` in the AppData folder and established communication with its C2 server at `https://gogohid.com`.
-# Analysis
+
+# Answer the Questions
 
 **Q1: Understanding the adversary helps defend against attacks. What is the name of the malware family that causes abnormal network traffic?**
 
@@ -18,6 +20,7 @@ From the Graph Summary category, go to see full graph and I found this.
   <img src="Image 1 - RAT collection from graph view.webp" alt="RAT collection from graph view" /> <br />
   <em>Image 1: RAT collection from graph view</em>
 </p>
+
 Then I look at the name of the lab `Yellow RAT Lab`, so maybe `Yellow Cockatoo RAT` is correct answer. But I need to verify that by click the Source Link. From the page, there list the IoCs and I found the hash of malware in that list. So, the malware is `Yellow Cockatoo RAT.
 <p align="center">
   <img src="Image 2 - IoCs of malware.webp" alt="IoCs of malware view" /> <br />
@@ -53,11 +56,13 @@ I check File system actions category and it has Files Dropped. But it seems not 
   <img src="Image 5 - File system actions.webp" alt="File system actions" /> <br />
   <em>Image 5: File system actions</em>
 </p>
+
 So, I decide to search from the Internet and found this report of [Red Canary](https://redcanary.com/blog/threat-intelligence/yellow-cockatoo/) that mention exactly what I need.
 <p align="center">
   <img src="Image 6 - Red Canary report.webp" alt="Red Canary report" /> <br />
   <em>Image 6: Red Canary report</em>
 </p>
+
 So, my answer is `solarmarker.dat`
 
 **Q6: It is crucial to identify the C2 servers with which the malware communicates to block its communication and prevent further data exfiltration. What is the C2 server that the malware is communicating with?**

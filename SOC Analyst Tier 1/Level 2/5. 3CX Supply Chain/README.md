@@ -8,6 +8,7 @@
 After updating 3CX software, the IT team found the antivirus alerts flag sporadic instances of the software being wiped from some workstations while others remain unaffected. Employees report issues with the 3CX app, and the IT security team identifies unusual communication patterns linked to recent software updates. This is a supply chain attack.
 
 As the threat intelligence analyst, I need to understand how the attackers compromised the 3CX app, identify the potential threat actor involved, and assess the overall extent of the incident.
+
 ## Overview
 
 The advanced persistent threat (APT) group responsible for this incident is LABYRINTH CHOLLIMA, which is also widely known as Lazarus. They use supply chain attack method to compromise the 3CX DesktopApp Electron Windows application, specifically versions `18.12.407` and `18.12.416`. 
@@ -15,7 +16,8 @@ The advanced persistent threat (APT) group responsible for this incident is LABY
 From about 2023-03-13 06:33:26 UTC, Lazarus create a `.msi` malware that contain two Trojan DLLs: `ffmpeg.dll` and `d3dcompiler_47.dll`. 
 
 They aimed to infiltrate target networks to execute malicious code, establishing persistence via DLL side-loading (MITRE T1574) while using RC4 encryption and VMWare-targeted virtualization evasion to bypass defensive mechanisms.
-# Analysis
+
+# Answer the Questions
 
 **Q1: Understanding the scope of the attack and identifying which versions exhibit malicious behavior is crucial for making informed decisions if these compromised versions are present in the organization. How many versions of 3CX running on Windows have been flagged as malware?**
 

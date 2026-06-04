@@ -6,11 +6,13 @@ An alert from the Intrusion Detection System (IDS) flagged suspicious lateral mo
 - **Tools**: Wireshark
 
 PsExex is lightweight, command-line utility from the Microsoft Sysinternals suite that allows administrators to execute processes on remote Windows systems. It use SMB protocol to establish communication channels with remote systems. It also support various authentication methods, including using a username and password, or authentication via NTLM or Kerberos.
+
 # Overview
 
 During a security incident, the network IDS detected suspicious lateral movement within the network. An attacker, operating from IP **10.0.0.130**, used the compromised credentials of the user account **ssales** to access other machines. 
 
 The attacker first pivoted to **SALES-PC** (**10.0.0.133**) by connecting to the hidden `ADMIN$` share and installing a remote service named **PSEXESVC.exe**. They executed this service via the DCERPC protocol and used the `IPC$` network share to establish a communication channel. After successfully compromising SALES-PC, the attacker continued lateral movement by targeting a second machine, **MARKETING-PC** (**10.0.0.131**).
+
 # Analysis
 
 First, I check all IPv4 addresses and all protocols exist in the PCAP file. 
@@ -18,15 +20,18 @@ First, I check all IPv4 addresses and all protocols exist in the PCAP file.
   <img src="./Assets/Image 1 - All Ipv4 addresses.webp" alt="All Ipv4 addresses" /> <br />
   <em>Image 1: All Ipv4 addresses</em>
 </p>
+
 <p align="center">
   <img src="./Assets/Image 2 - All protocols.webp" alt="All protocols" /> <br />
   <em>Image 2: All protocols</em>
 </p>
+
 After searching, I found the packet no 132. The `10.0.0.130:49696` connected to `10.0.0.133:445` via SMB2 protocol under account `ssales` in host `HR-PC`. Then, `10.0.0.130` accessed to `IPC$` and `ADMIN$` folder, both requests are success because I found a `NT Status: STUSTUS_SUCCESS` in both reponse packets. 
 <p align="center">
   <img src="./Assets/Image 3 - Initial access.webp" alt="Initial access" /> <br />
   <em>Image 3: Initial access</em>
 </p>
+
 > [!note]
 > The `IPC$` (Inter-Process Communication) share or also known as a null session connection is a hidden, virtual administrative share in Windows used for communication between network programs and remote administration. It does not map to a physical folder on the hard drive but acts as a conduit for to allow processes to interact across machine.
 > 
@@ -37,21 +42,25 @@ Then in the packet 140, `10.0.0.130` request to open the `ADMIN$` folder. This i
   <img src="./Assets/Image 4 - Exploratory phase.webp" alt="Exploratory phase" /> <br />
   <em>Image 4: Exploratory phase</em>
 </p>
+
 Then, `10.0.0.130` create `PSEXESVC.exe` file in `ADMIN$` folder. 
 <p align="center">
   <img src="./Assets/Image 5 - Upload PSEXESVC.exe.webp" alt="Upload PSEXESVC.exe" /> <br />
   <em>Image 5: Upload PSEXESVC.exe</em>
 </p>
+
 Then, to follow this traffic, I filtered with `ip.addr == 10.0.0.130`. After create a file, `10.0.0.130` want to write data into that file through `write request`.
 <p align="center">
   <img src="./Assets/Image 6 - Another file.webp" alt="Another file" /> <br />
   <em>Image 6: Another file</em>
 </p>
+
 After attacker closed the `PSEXESVC.exe` file, I found the DCERPC protocol from attacker.
 <p align="center">
   <img src="./Assets/Image 7 - Run the PSEXECSVC.exe.webp" alt="Run the PSEXECSVC.exe" /> <br />
   <em>Image 7: Run the PSEXECSVC.exe</em>
 </p>
+
 > [!note]
 > DCERPC is a networking framework that allows a computer program to execute procedures on a remote server as if they were local
 
@@ -62,8 +71,11 @@ Then, attacker also created and writed the file `PSEXEC-HR-PC-1C6C5D14.key` in t
   <img src="./Assets/Image 8 - Create file.key.webp" alt="Create file.key" /> <br />
   <em>Image 8: Create file.key</em>
 </p>
+
 Then he open the `PSEXESVC` pipe name in `IPC$`. This pipe name had already appeared in the `IPC$` because attacker run the `PSEXESVC.exe` in the previous step. 
+
 # Answer the Questions
+
 **Q1: To effectively trace the attacker's activities within our network, can you identify the IP address of the machine from which the attacker initially gained access?**
 
 Attacker IP is `10.0.0.130`.

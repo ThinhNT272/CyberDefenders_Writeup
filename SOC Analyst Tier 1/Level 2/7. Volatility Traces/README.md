@@ -6,11 +6,13 @@ I have been provided with a memory dump (`memory.dmp`) from the affected system.
 
 - **Category**: Endpoint Forensics
 - **Tools**: Volatility 3
+
 ## Overview
 
 On **May 2, 2024**, a multinational corporation detected suspicious PowerShell processes on their systems. A forensic analysis of the provided memory dump (`memory.dmp`) using Volatility 3 revealed that a suspicious process named **InvolceCheckList.exe**, running under the domain user account **Lee**, spawned two malicious PowerShell processes and a **RegSvcs.exe** process.
 
 To evade detection (MITRE sub-technique **T1562.001**), the malware executed the PowerShell cmdlet **Add-MpPreference** to exclude both **InvolceCheckList.exe** and **HcdmIYYf.exe** from Windows Defender scanning. Additionally, the malware executed **schtasks.exe** to establish persistence on the compromised system.
+
 # Analysis
 
 I was provided a `memory.dmp` and a `windows.psscan_out.txt` files. As I know there is a suspicious PowerShell processes, I check `windows.psscan_out.txt` file and found that there are 2 PowerShell processes with 2 PID `6980`, `7656` with the same PPID (parent process of PID) `4596`.
@@ -47,6 +49,7 @@ Then I want to know the who run this process, so I use `windows.getsids` to disc
   <img src="./Assets/Image 5 - SIDs run powershell process.webp" alt="SIDs run powershell process" /> <br />
   <em>Image 5: SIDs run powershell process</em>
 </p>
+
 # Answer the Questions
 
 **Q1: Identifying the parent process reveals the source and potential additional malicious activity. What is the name of the suspicious process that spawned two malicious PowerShell processes?**

@@ -8,6 +8,7 @@ I was provided a folder contain 3 information: Link to her github, office.jpg an
 
 - **Category**: Threat Intel
 - **Tools**: Google
+
 # Overview
 
 The investigation reveals that the insider threat is an employee with the online username **EMarseille99**, who works at the company's office in **Birmingham, England**.
@@ -15,6 +16,7 @@ The investigation reveals that the insider threat is an employee with the online
 The incident began when the client's network was compromised and went offline. Forensic analysis of the insider's public GitHub repository, `Project-Build---Custom-Login-Page`, uncovered a leaked API key and the plaintext password **PicassoBaguette99**. The insider also collected various hacking tools on GitHub, including the **Xmrig** cryptocurrency miner.
 
 Using OSINT techniques, the investigator traced the insider's social media presence across platforms like GitHub, **Steam**, and Instagram. Her Instagram posts showed that she traveled to **Singapore** (Marina Bay Sands) for a holiday, while her family lives in **Dubai**. Finally, surveillance tracked the suspect to an apartment near the University of Notre Dame in **Indiana, USA**.
+
 # Analysis
 
 From the repositories in the Emarseille99 github, I found the list of her repositories:
@@ -39,6 +41,7 @@ But only `Project-Build---Custom-Login-Page` repo has description as `Working`. 
   <img src="./Assets/Image 1 - Sensitive project public.webp" alt="Sensitive project public" /> <br />
   <em>Image 1: Sensitive project public</em>
 </p>
+
 When I check the `Login Page.js` of the project, I found the `API Key = aJFRaLHjMXvYZgLPwiJkroYLGRkNBW`. 
 
 I also found the creadential of her:
@@ -66,6 +69,7 @@ It seems nothing special. Then I decide to find the location of her images `WebC
 
 - `WebCam.png`: This is a live aerial view of the University of Notre Dame campus, captured by an EarthCam mounted on the university's Main Building.
 - `office.png`: This image features the entrance to Birmingham New Street railway station and the attached Grand Central shopping complex.
+
 # Answer the Questions
 
 **Q1: File -> Github.txt: What API key did the insider add to his GitHub repositories?**

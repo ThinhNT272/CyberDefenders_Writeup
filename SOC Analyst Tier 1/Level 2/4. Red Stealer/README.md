@@ -6,11 +6,13 @@ Your task is to investigate this executable by analyzing its hash. The goal is t
 
 - **Category**: Threat Intel
 - **Tools**: VirusTotal, MalwareBazaar, ThreatFox
+
 ## Overview
 
 During a security investigation, a suspicious executable named **WexTract** was found on a colleague's computer. Analysis of the file indicates that it is a **RedLine Stealer** (also known as **RecordStealer**) Trojan, which was first observed on VirusTotal on **2023-10-06 at 04:41:50 UTC**.
 
 The malware was designed to collect sensitive data from the local system (MITRE ATT&CK technique **T1005**) for exfiltration. To achieve this, it uses **ADVAPI32.dll** for privilege escalation. After execution, the malware performs DNS queries to resolve social media domains like **facebook.com** and communicates with a Command and Control (C2) server at IP address **77.91.124.55** on port **19071**.
+
 # Answer the Questions
 
 **Q1: Categorizing malware enables a quicker and clearer understanding of its unique behaviors and attack vectors. What category has Microsoft identified for that malware in VirusTotal?**

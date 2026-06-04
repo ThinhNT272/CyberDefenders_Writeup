@@ -8,6 +8,7 @@ SHA256 hash (Windows 7 x64-Snapshot4.vmem): 51bca9647e7f17da9391a23da27e8248f65e
 
 - **Category**: Endpoint Forensics
 - **Tools**: Volatility 3
+
 ## Overview
 
 The file belong to user `0xSh3rl0ck` in host `Win7 SP1`, IP address is `192.168.195.136`. This file was created at `21:50:07` on `2023-08-09`.
@@ -15,6 +16,7 @@ The file belong to user `0xSh3rl0ck` in host `Win7 SP1`, IP address is `192.168.
 At about `21:33`, the malicious file `C:\Users\0XSH3R~1\AppData\Local\Temp\925e7e99c5lssass.exe` was executed with PID `2748` by anonymous user `0XSH3R~1`. The malware connect to C2 server `41.75.84.12:80` through port `49168`. It try to install `cred64.dll` and `clip64.dll` into workstation.
 
 This malicious file was also located `\Windows\System32\Tasks\lssass.exe` to make sure persistent connection. 
+
 # Answer the Questions
 
 First, I want to know all the plugins that available wil `window.vmem` file.
@@ -165,6 +167,7 @@ Usually the command line to run the file will contain the directory of that file
   <img src="Image 2 - Malware directory.webp" alt="Malware directory" /> <br />
   <em>Image 2: Malware directory</em>
 </p>
+
  The answer will be `C:\Users\0XSH3R~1\AppData\Local\Temp\925e7e99c5\lssass.exe` because `lssass.exe` is a parent process of `rundll32.exe`.
 
 And from that, I know the malicious user is `0XSH3R~1`.
@@ -186,6 +189,7 @@ Then I know the C2 server connects to this process through port `80`, represent 
   <img src="Image 4 - Files added to workstation.webp" alt="Files added to workstation" /> <br />
   <em>Image 4: Files added to workstation</em>
 </p>
+
 Malware bring `2` files (`cred64.dll` and `clip64.dll`) onto workstation.
 
 **Q5: Identifying the storage points of these additional components is critical for containment and cleanup. What is the full path of the file downloaded and used by the malware in its malicious activity?**
@@ -195,6 +199,7 @@ To see full path of file, I filter `python3 vol.py -f /home/ubuntu/Desktop/Start
   <img src="Image 5 - Full path of downloaded file.webp" alt="Full path of downloaded file" /> <br />
   <em>Image 5: Full path of downloaded file</em>
 </p>
+
 So, full path of `clip64.dll` is `C:\Users\0xSh3rl0ck\AppData\Roaming\116711e5a2ab05\clip64.dll`.
 
 **Q6: Once retrieved, the malware aims to activate its additional components. Which child process is initiated by the malware to execute these files?**
@@ -208,4 +213,5 @@ To know where the malware `lssass.exe` loacte for ensuring the persistence mecha
   <img src="Image 6 - Malware location.webp" alt="Malware location" /> <br />
   <em>Image 6: Malware location</em>
 </p>
+
 I see malware located in 2 folder. But the `Temp` folder represent the malware is running. And the `\Windows\System32\Tasks\lssass.exe` shows the malware was in deep of the OS, indicates the persistence mechanisms.

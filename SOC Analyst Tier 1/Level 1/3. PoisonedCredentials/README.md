@@ -10,6 +10,7 @@ SHA256 hash (PoisonedCredentials.pcap): a0703e71eef0c44f18e580951d8d6439289ff0d2
 - **Tools**: Wireshark
 
 First, I need to know what is LLMNR and NBT-NS poison attack? Basically, it is a man-in-the-middle (MitM) attack because of the UDP protocol that both LLMNR and NBT-NS use. And these protocol are not use any authentication techniques. So the attacker can intercept NetBIOS name resolution requests and reply with malicious responses. Then the victim will connect to the attacker instead of the real server. 
+
 ## Overview
 
 At `20:32` on `2023-10-21` , attacker used the LLMNR poison technique to trick the victim `192.168.232.176` that he was `prinetr`.  At `20:33`, attacker compromised victim `ACCOUNTINGPC - 192.168.232.176` via SMB2 using username `janesmith` of domain `cybercactus.local` and `NTLM Response`.
@@ -27,6 +28,7 @@ Firstly, I check for some information of the PCAP file. This file recorded netwo
   <img src="Image 2 - Main type of protocol.webp" alt="Main type of protocol" /> <br />
   <em>Image 2: Main type of protocol</em>
 </p>
+
 I know the attacker use LLMNR and NB-NS poison attack, so I filtered with these traffic. Then, I found `192.168.232.162` requested for `fileshaare` instead of `fireshare` in both protoco. However the mistyped of the request, the host with IP address `192.168.232.215` still responsed in both protocols and pointed to it self as `fileshaare`.
 <p align="center">
   <img src="Image 3 - LLMNR fileshaare.webp" alt="LLMNR fileshaare" /> <br />
@@ -36,6 +38,7 @@ I know the attacker use LLMNR and NB-NS poison attack, so I filtered with these 
   <img src="Image 4 - NB-NS fileshaare.webp" alt="NB-NS fileshaare" /> <br />
   <em>Image 4: NB-NS fileshaare</em>
 </p>
+
 Then when another host `192.168.232.176` requested for `printer`, `192.168.232.215` also response and said it is a printer. The same with another domain name `cybercactus`.
 <p align="center">
   <img src="Image 5 - LLMNR printer.webp" alt="LLMNR printer" /> <br />
@@ -45,6 +48,7 @@ Then when another host `192.168.232.176` requested for `printer`, `192.168.232.2
   <img src="Image 6 - NB-NS cybercactus.webp" alt="NB-NS cybercactus" /> <br />
   <em>Image 6: NB-NS cybercactus</em>
 </p>
+
 `192.168.232.215` cannot be `fileshaare`, `prinetr` and `CYBERCACTUS` at the same time, so it must be the attacker. Here is some information of the attacker.
 
 - **IPv4 address**: `192.168.232.215`
@@ -66,6 +70,7 @@ Then, I found that at `20:33` attacker connected to `192.168.232.176` via SMB2, 
   <img src="Image 9 - Attacker connect via SMB2.webp" alt="Attacker connect via SMB2" /> <br />
   <em>Image 9: Attacker connect via SMB2</em>
 </p>
+
 And in the packet 241, I found some information of victime machine.
 
 - IPv4 address: `192.168.232.176`
@@ -80,7 +85,9 @@ And the packets from 251 to 258 is the data that attacker got. I cannot see the 
   <img src="Image 11 - Data encrypted.webp" alt="Data encrypted" /> <br />
   <em>Image 11: Data encrypted</em>
 </p>
+
 Based on the information that I analysis above, I can answer the questions now
+
 # Answer the Questions
 
 **Q1: In the context of the incident described in the scenario, the attacker initiated their actions by taking advantage of benign network traffic from legitimate machines. Can you identify the specific mistyped query made by the machine with the IP address 192.168.232.162?**
@@ -102,8 +109,3 @@ It is `janesmith`.
 **Q5: As part of our investigation, we aim to understand the extent of the attacker's activities. What is the hostname of the machine that the attacker accessed via SMB?**
 
 It is `AccountingPC`.
-
-# Question
-
-Con 215 lấy `NTLMv2 Response` từ đâu ra? Và tại sao lại là host 215 negotiate request tới client 176?
-![[README-1778780254379.webp]]
