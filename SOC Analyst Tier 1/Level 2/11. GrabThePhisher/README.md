@@ -8,8 +8,12 @@ Your task is to conduct threat intelligence analysis on the phishing infrastruct
 - **Tools**: VS Code
 
 ## Overview
-(Conclude your report with a summary of the main finding of you analysis --> 5 Ws: Who, What, When, Where, Why)
-The attacker use TTPs ...
+
+During a security investigation of a compromised server hosting a PancakeSwap phishing site, a PHP-based phishing kit was discovered targeting cryptocurrency wallet credentials. 
+
+The kit was designed to lure users into entering their seed phrases. While ten of the simulated wallets on the landing page used standard modal behavior, clicking on the MetaMask wallet redirected users to the `/metamask/` folder, executing a malicious script named **metamask.php**. This script collected the victims' IP addresses and geolocation details by querying the **Sypex Geo** API (`api.sypexgeo.net`).
+
+The stolen seed phrases (with 3 phrases already collected) and victim information were exfiltrated via the Telegram Bot API using token **5457463144:AAG8t4k7e2ew3tTi0IBShcWbSia0Irvxm10** to the attacker's channel (**Chat ID: 5442785564**) and logged locally in **log.txt**. Threat intelligence analysis of the Telegram bot configuration traced the phishing infrastructure back to a threat actor operating under the alias **Marcus Aurelius** (username: **pumpkinboii**), with the phishing kit codebase attributing development support to an ally with the username **j1j1b1s@m3r0**.
 
 # Analysis
 
