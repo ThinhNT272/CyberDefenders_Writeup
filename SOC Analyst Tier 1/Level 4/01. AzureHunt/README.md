@@ -7,7 +7,7 @@ A finance company's Azure environment has flagged multiple failed login attempts
 
 ## Overview
 
-The attack phase happened in `2023-10-05` to `2023-10-06` by 2 compromised account `alice` and `IT Admin`. Furthermore, he also created an fake account for persistent access. 
+The attack phase happened in `2023-10-05` to `2023-10-06` by 2 compromised account `alice` and `IT Admin`. Furthermore, he also created an fake account called 'IT Support' for persistent access. 
 
 For more detail, at about `2023-10-05 14:30`, account `alice` was compromised, by some how attacker know the alice's credentials, so that he can access the Azure. After successfully log-in account `alice`, attacer use something like VPN to swith the location from US to Germany. Then at about `15:14 - 15:18`, attacker (use account `alice` with "Storage Blob Data Reader" permission) access sensitive information in Blob Storage files as below:
 
@@ -147,16 +147,18 @@ So "alice" is also a compromised account. But how he can get into accont alice.
 
 After filtering, in `Oct 5, 2023`, the system recorded a anormal sign-in action from "alice". There are the reson of 3 request failure:
 
-- `14:30:26` (Error Code 50140) - `This error occurred due to 'Keep me signed in' interrupt when the user was signing-in`: The attacker attempted to log-in using the correct password for user Alice. However, the session was interrupted due to a system authentication prompt.
+- `14:30:26` (Error Code 50140) - `This error occurred due to 'Keep me signed in' interrupt when the user was signing-in`.
 
-- `14:30:27` (Error Code 50126) - `Invalid username or password`: The adversary immediately retried the login but failed at the primary authentication step due to an invalid password.
+- `14:30:27` (Error Code 50126) - `Invalid username or password on-premise username or password`.
 
-- `14:31:11` (Error Code 50072) - `Due to a configuration change by your administrator, or because you moveed to a new location, you must enroll in multi-factor authentication to access the tenant (MFA required in Azure AD)`: The threat actor proceeded with another login attempt and entered Alice's correct password. However, because the tenant's Security Defaults policy mandates Multi-Factor Authentication registration (MFA Registration Required) for unconfigured accounts, the Azure AD system successfully blocked the access attempt (outcome: failure).
+- `14:31:11` (Error Code 50072) - `Due to a configuration change by your administrator, or because you moveed to a new location, you must enroll in multi-factor authentication to access the tenant (MFA required in Azure AD)`.
 
 <p align="center">
   <img src="./Assets/Image 11 - Attacker access account alice.webp" alt="Attacker access account alice" /> <br />
   <em>Image 11: Attacker access account alice</em>
 </p>
+
+From 3 login-attemps above, I assume that attacker access by cookie by `alice`. Because in the first failed log-in, the error message appear `Keep me signed in`, this means this log-in use the expire cookie of account `alice`. He doesn't know the correct password because of the second failed log-in `invalid username or password`. And in the 3rd failed log-in, it seems like attacker use new cookie and access system, but because of the unfamiliar geographic, the account need to enroll MFA.
 
 However, attacker still by pass the protection and access the system, evidence is he can access sensitive Blob Storage as above.
 
