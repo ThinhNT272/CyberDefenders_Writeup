@@ -31,7 +31,7 @@ So, there are 2 versions of 3CX running on Windows have been flagged as malware.
 
 From VirusTotal in Details tab and History category, I know the creation time of the malware is "2023-03-13 06:33:26 UTC"
 <p align="center">
-  <img src="./Assets/Image 1 - Malware Creation Time.webp" alt="Malware Creation Time" /><br>
+  <img src="./Assets/Image 1 - Malware Creation Time.png" alt="Malware Creation Time" /><br>
   <em>Image 1: Malware Creation Time</em>
 </p>
 
@@ -39,7 +39,7 @@ From VirusTotal in Details tab and History category, I know the creation time of
 
 To know which `.dll` files that the attacker uses in the malicious, check VirusTotal, Relations tab, Bundled Files category, which represent the child files in the malware. 
 <p align="center">
-  <img src="./Assets/Image 2 - '.dll' files.webp" alt="'.dll' files" /><br>
+  <img src="./Assets/Image 2 - '.dll' files.png" alt="'.dll' files" /><br>
   <em>Image 2: ".dll" files</em>
 </p>
 
@@ -49,7 +49,7 @@ So, the malicious has 2 `.dll` files `ffmpeg.dll` and `d3dcompiler_47.dll`.
 
 I check from Behavior tab, MITRE ATT&CK Tactics and Techniques category. 
 <p align="center">
-  <img src="./Assets/Image 3 - MITE ATT&CK Techniques.webp" alt="MITE ATT&CK Techniques" /><br>
+  <img src="./Assets/Image 3 - MITE ATT&CK Techniques.png" alt="MITE ATT&CK Techniques" /><br>
   <em>Image 3: MITE ATT&CK Techniques</em>
 </p>
 
@@ -59,12 +59,12 @@ So, `msi` file use T1574 technique to load the malicious DLL.
 
 Go back to the Bundled Files category from the Q3 step and click to 2 file `dll`, I find that the threat category of 2 malicious DLLs is Trojan.
 <p align="center">
-  <img src="./Assets/Image 4 - ffmpeg.dll file.webp" alt="ffmpeg.dll" /><br>
+  <img src="./Assets/Image 4 - ffmpeg.dll file.png" alt="ffmpeg.dll" /><br>
   <em>Image 4: ffmpeg.dll file</em>
 </p>
 
 <p align="center">
-  <img src="./Assets/Image 5 - d3dcompiler_47.dll.webp" alt="d3dcompiler_47.dll" /><br>
+  <img src="./Assets/Image 5 - d3dcompiler_47.dll.png" alt="d3dcompiler_47.dll" /><br>
   <em>Image 5: d3dcompiler_47.dll</em>
 </p>
 
@@ -72,7 +72,7 @@ Go back to the Bundled Files category from the Q3 step and click to 2 file `dll`
 
 Check MITRE ATT&CK Tactics and Techniques category like Q4, I can see that the malicious DLLs use MITRE T for the virtualization/sandbox evasion techinque.
 <p align="center">
-  <img src="./Assets/Image 6 - virtualization or sandbox evasion techinque.webp" alt="Virtualization/sandbox evasion techinque.dll" /><br>
+  <img src="./Assets/Image 6 - virtualization or sandbox evasion techinque.png" alt="Virtualization/sandbox evasion techinque.dll" /><br>
   <em>Image 6: Virtualization/sandbox evasion techinque</em>
 </p>
 
@@ -80,7 +80,7 @@ Check MITRE ATT&CK Tactics and Techniques category like Q4, I can see that the m
 
 Check Capabilities category from Behavior tab of `ffmpeg.dll` file, I can see that the hypervisor is targeted by the anti-analysis techniques in the `ffmpeg.dll` file is VMWare. 
 <p align="center">
-  <img src="./Assets/Image 7 - anti-analysis in the ffmpeg.dll file.webp" alt="Anti-analysis in the ffmpeg.dll file" /><br>
+  <img src="./Assets/Image 7 - anti-analysis in the ffmpeg.dll file.png" alt="Anti-analysis in the ffmpeg.dll file" /><br>
   <em>Image 7: Anti-analysis in the ffmpeg.dll file</em>
 </p>
 
@@ -88,7 +88,7 @@ Check Capabilities category from Behavior tab of `ffmpeg.dll` file, I can see th
 
 Still in Capabilities category, I know `ffmpeg.dll` use RC4 algorithm for encryption.
 <p align="center">
-  <img src="./Assets/Image 8 - encrypted algorithm of ffmpeg.dll file.webp" alt="Encrypted algorithm of ffmpeg.dll file" /><br>
+  <img src="./Assets/Image 8 - encrypted algorithm of ffmpeg.dll file.png" alt="Encrypted algorithm of ffmpeg.dll file" /><br>
   <em>Image 8: Encrypted algorithm of ffmpeg.dll file</em>
 </p>
 

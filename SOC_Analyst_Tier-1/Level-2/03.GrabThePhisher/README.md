@@ -27,20 +27,20 @@ Before analysing, I want to understand some term like "DeFi", "seed phrases" and
 
 At first, I run the main html file, there are 11 wallets. Then I check source code of the web and found that, 10 wallets use `onclick="modal(this)"` in the button tag, only metamask wallet use `onclick="vib(1);jj2 = true;jj = true;"`. So I scroll down to know how the back end handle each wallet and found this.
 <p align="center">
-  <img src="./Assets/Image 1.1 - Function modal.webp" alt="Function modal" /> <br />
-  <img src="./Assets/Image 1.2 - Function vib.webp" alt="Function vib" /> <br />
+  <img src="./Assets/Image 1.1 - Function modal.png" alt="Function modal" /> <br />
+  <img src="./Assets/Image 1.2 - Function vib.png" alt="Function vib" /> <br />
   <em>Image 1: Wallet function</em>
 </p>
 
 It seems like nothing special with function modal, but in the function vib, the will redirect to `/metamask/` folder if user click in the metamask wallet. So I go to metamask folder and check. There are 2 files `index.html` and `metamask.php`. 
 <p align="center">
-  <img src="./Assets/Image 2 - Script gather information.webp" alt="Script gather information" /> <br />
+  <img src="./Assets/Image 2 - Script gather information.png" alt="Script gather information" /> <br />
   <em>Image 2: Script gather information</em>
 </p>
 
 In the file `metamask.php`, there is a code that gather user information. It connect with API `http://api.sypexgeo.net/json/` and `REMOTE_ADDR`. Moreoever, there is also sent message to `https://api.telegram.org/bot` with token `5457463144:AAG8t4k7e2ew3tTi0IBShcWbSia0Irvxm10` as the alert. Then store the stolen seed phares in the `log.txt` file.
 <p align="center">
-  <img src="./Assets/Image 3 - Send message to telegram bot.webp" alt="Send message to telegram bot" /> <br />
+  <img src="./Assets/Image 3 - Send message to telegram bot.png" alt="Send message to telegram bot" /> <br />
   <em>Image 3: Send message to telegram bot</em>
 </p>
 

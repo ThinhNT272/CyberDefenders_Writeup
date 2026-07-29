@@ -18,19 +18,19 @@ I were provided a `web server.pcap` that contain `21 070` packets from `01:13:06
 
 Moreoever, the file contains `7` IP addresses.
 <p align="center">
-  <img src="./Assets/Image 1 - All IP addresses.webp" alt="All IP addresses" /> <br />
+  <img src="./Assets/Image 1 - All IP addresses.png" alt="All IP addresses" /> <br />
   <em>Image 1: All IP addresses</em>
 </p>
 
 At first, from the session setup phase of SMB2 protocol - packet 10, at `01:13:06`, I find that host `10.0.0.115` accessed `10.0.0.105`, host name is `CYBERDEFENDERS-VIRTUAL-MACHINE` under `root` account.
 <p align="center">
-  <img src="./Assets/Image 2 - Information of host 115 and 105.webp" alt="Information of host 115 and 105" /> <br />
+  <img src="./Assets/Image 2 - Information of host 115 and 105.png" alt="Information of host 115 and 105" /> <br />
   <em>Image 2: Information of host 115 and 105</em>
 </p>
 
 Then, host `10.0.0.105` continue to access `IPC$` and `shared` folder in server `10.0.0.115`. At `01:13:12` (packet 31), host `10.0.0.115` find 3 files `pdf` in `shared` folder on server `10.0.0.105`.
 <p align="center">
-  <img src="./Assets/Image 3 - 3 files pdf in server.webp" alt="3 files pdf in server" /> <br />
+  <img src="./Assets/Image 3 - 3 files pdf in server.png" alt="3 files pdf in server" /> <br />
   <em>Image 3: 3 files pdf in server</em>
 </p>
 
@@ -42,15 +42,15 @@ And at `01:13:27` (packet 124), host `115` read the file `work_report2022.pdf` (
 
 However, I can open it due to format error.
 <p align="center">
-  <img src="./Assets/Image 4.1 - 115 read 2 files.webp" alt="115 read 2 files" /> <br />
-  <img src="./Assets/Image 4.2 - Cannot open files due to format error.webp" alt="Cannot open files due to format error" /> <br />
+  <img src="./Assets/Image 4.1 - 115 read 2 files.png" alt="115 read 2 files" /> <br />
+  <img src="./Assets/Image 4.2 - Cannot open files due to format error.png" alt="Cannot open files due to format error" /> <br />
   <em>Image 4: 2 pdf files that host 115 read</em>
 </p>
 
 Then, at around `01:13` the host `10.0.0.115` connected with `10.0.0.112` via SSHv2 protocol. And I can find some information like the protocol verion `SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.3` and the algorithm that they use to encrypt the message is the combination of  `chacha20` and `poly1305-AES`.
 <p align="center">
-  <img src="./Assets/Image 5.1 - Encrypted algorithm.webp" alt="Encrypted algorithm" /> <br />
-  <img src="./Assets/Image 5.2 - Web server.webp" alt="Web server" /> <br />
+  <img src="./Assets/Image 5.1 - Encrypted algorithm.png" alt="Encrypted algorithm" /> <br />
+  <img src="./Assets/Image 5.2 - Web server.png" alt="Web server" /> <br />
   <em>Image 5: Host 115 connect with web server</em>
 </p>
 
@@ -58,8 +58,8 @@ Moreover, host `10.0.0.115` still accessed website in `10.0.0.112` through port 
 
 Next, at about `01:18` (packet 1091), I see many request come from host `14.0.0.120` to web server. The special thing here is that the host `14.0.0.120` did not just send so many requets, it also requested to multiple port. Moreoever, host `14.0.0.120` just sent TCP `[SYN]` packet and did not replay `[ACK]` event when the services on the port response. It is exactly the `TCP SYN` scan action.
 <p align="center">
-  <img src="./Assets/Image 6.1 - TCP SYN scan request.webp" alt="TCP SYN scan request" /> <br />
-<img src="./Assets/Image 6.2 - IP location.webp" alt="IP location" /> <br />
+  <img src="./Assets/Image 6.1 - TCP SYN scan request.png" alt="TCP SYN scan request" /> <br />
+<img src="./Assets/Image 6.2 - IP location.png" alt="IP location" /> <br />
   <em>Image 6: Attacker scan port </em>
 </p>
 
@@ -67,25 +67,25 @@ And I also know the attacker come from `Guangdong - China`.
 
 After scanning, at `01:19` (packet 19948) suspicious host connected with the web server through port `8080`, then used `gobuster` to  scan all hidden assets on web server.
 <p align="center">
-  <img src="./Assets/Image 7 - Gobuster scan hidden assets.webp" alt="Gobuster scan hidden assets" /> <br />
+  <img src="./Assets/Image 7 - Gobuster scan hidden assets.png" alt="Gobuster scan hidden assets" /> <br />
   <em>Image 7: Gobuster scan hidden assets </em>
 </p>
 
 After that, at about `01:22`, the attacker brute-forced the admin page `/manager/html/upload` and uploaded a suspicious file called `JXQOZY.war` through credentials `admin:tomcat`.
 <p align="center">
-  <img src="./Assets/Image 8 - Attacker post malicious file into web server.webp" alt="Attacker post malicious file into web server" /> <br />
+  <img src="./Assets/Image 8 - Attacker post malicious file into web server.png" alt="Attacker post malicious file into web server" /> <br />
   <em>Image 8: Attacker post malicious file into web server </em>
 </p>
 
 This is a web application archive, a type of compressed file. When it is deployed into Apache Tomcat server, it will be extracted and executed automatically into a web app that can be accessed. That is why I cannot see the content of the file.
 <p align="center">
-  <img src="./Assets/Image 9 - Cannot see the content of JXQOZY file.webp" alt="Cannot see the content of JXQOZY file" /> <br />
+  <img src="./Assets/Image 9 - Cannot see the content of JXQOZY file.png" alt="Cannot see the content of JXQOZY file" /> <br />
   <em>Image 9: File JXQOZY.war</em>
 </p>
 
 Then at  about `01:22 - 01:24`, in the packet 20651, 20653, 20657, ..., attacker push some thing into web server through malicious file `JXQOZY.war`. I want to know exectly what is it, so I go to `File > Export Objects > HTTP`.
 <p align="center">
-  <img src="./Assets/Image 10 - Attacker command.webp" alt="Attacker command" /> <br />
+  <img src="./Assets/Image 10 - Attacker command.png" alt="Attacker command" /> <br />
   <em>Image 10: Attacker command</em>
 </p>
 
@@ -116,7 +116,7 @@ Moreover from these command, I know that the `JXQOZY.war` file not contains web 
 
 After attack phase by `14.0.0.120`, the host `10.0.0.115` connected agains to web server. It seems like this is the admin that comeback to check the server after an alert of suspicious activity.
 <p align="center">
-  <img src="./Assets/Image 11 - Admin check the server.webp" alt="Admin check the server" /> <br />
+  <img src="./Assets/Image 11 - Admin check the server.png" alt="Admin check the server" /> <br />
   <em>Image 11: Admin check the server</em>
 </p>
 

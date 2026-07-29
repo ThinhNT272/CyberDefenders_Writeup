@@ -17,7 +17,7 @@ After successfully exfiltrating the user's data, the malware performed anti-fore
 
 From Detail tab, History category, I found the creation time of the malware is `2022-09-28 17:40:46 UTC`.
 <p align="center">
-  <img src="Image 1 - Malware creation time.webp" alt="Malware creation time" /> <br />
+  <img src="Image 1 - Malware creation time.png" alt="Malware creation time" /> <br />
   <em>Image 1: Malware creation time</em>
 </p>
 
@@ -25,7 +25,7 @@ From Detail tab, History category, I found the creation time of the malware is `
 
 I found the information of C2 server that malware connect with in Relation tab, Contacted URLs category. 
 <p align="center">
-  <img src="Image 2 - URL of C2 server that malware connect with.webp" alt="URL of C2 server that malware connect with" /> <br />
+  <img src="Image 2 - URL of C2 server that malware connect with.png" alt="URL of C2 server that malware connect with" /> <br />
   <em>Image 2: URL of C2 server that malware connect with</em>
 </p>
 
@@ -39,7 +39,7 @@ As I said above, the `sqlite3.dll` is the library that the malware request. In t
 
 But to verify that information, I go to File Dropped category from Behavior tab. This category refers to files that are created and written to a disk during the automated sandbox execution of the malware.
 <p align="center">
-  <img src="Image 3 - File Dropped.webp" alt="File Dropped" /> <br />
+  <img src="Image 3 - File Dropped.png" alt="File Dropped" /> <br />
   <em>Image 3: File Dropped</em>
 </p>
 
@@ -49,7 +49,7 @@ So my answer is `sqlite3.dll`.
 
 From the Malware configuration category, I found the RC4 key is `5329514621441247975720749009`
 <p align="center">
-  <img src="Image 4 - RC4 key.webp" alt="RC4 key" /> <br />
+  <img src="Image 4 - RC4 key.png" alt="RC4 key" /> <br />
   <em>Image 4: RC4 key</em>
 </p>
 
@@ -57,7 +57,7 @@ From the Malware configuration category, I found the RC4 key is `532951462144124
 
 From the VPN.exe process, I found that there are 2 MITE ATT&CK that steal user credentials. And both have same main MITRE ATT&CS `T1555`.
 <p align="center">
-  <img src="Image 5 - MITRE ATT&CK.webp" alt="MITRE ATT&CK" /> <br />
+  <img src="Image 5 - MITRE ATT&CK.png" alt="MITRE ATT&CK" /> <br />
   <em>Image 5: MITRE ATT&CK</em>
 </p>
 
@@ -65,7 +65,7 @@ From the VPN.exe process, I found that there are 2 MITE ATT&CK that steal user c
 
 I found the information in the cmd.exe process `del "C:\ProgramData\*.dll`. This command will delete all DLL files (`*.dll`) in the `C:\ProgramData` folder.
 <p align="center">
-  <img src="Image 6 - Directory that delete all DLL files.webp" alt="Directory that delete all DLL files" /> <br />
+  <img src="Image 6 - Directory that delete all DLL files.png" alt="Directory that delete all DLL files" /> <br />
   <em>Image 6: Directory that delete all DLL files</em>
 </p>
 
@@ -73,6 +73,6 @@ I found the information in the cmd.exe process `del "C:\ProgramData\*.dll`. This
 
 From the timeout.exe process, I found the command `timeout /t 5`. This command will pause the process after `5s`.
 <p align="center">
-  <img src="Image 7 - Timeout.webp" alt="Timeout" /> <br />
+  <img src="Image 7 - Timeout.png" alt="Timeout" /> <br />
   <em>Image 7: Timeout</em>
 </p>

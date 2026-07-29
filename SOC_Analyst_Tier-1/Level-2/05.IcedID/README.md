@@ -9,21 +9,21 @@ A cyber threat group was identified for initiating widespread phishing campaigns
 
 At first, I search in VirusTotal to verify this is the malware and it flagged as a trojan.
 <p align="center">
-  <img src="./Assets/Image 1 - Verify the malware.webp" alt="Verify the malware" /> <br />
+  <img src="./Assets/Image 1 - Verify the malware.png" alt="Verify the malware" /> <br />
   <em>Image 1: Verify the malware</em>
 </p>
 
 Then, I go to Detail tab to see more information about this malware like creation time and other name of malware.
 <p align="center">
-  <img src="./Assets/Image 2 - Creation time and other name of malware.webp" alt="Creation time and other name of malware" /> <br />
+  <img src="./Assets/Image 2 - Creation time and other name of malware.png" alt="Creation time and other name of malware" /> <br />
   <em>Image 2: Creation time and other name of malware</em>
 </p>
 
 Then I go to Relations tab to see the C2 server or something like this that the malware connect with.
 <p align="center">
-  <img src="./Assets/Image 3.1 - Malware connect URL.webp" alt="Malware connect URL" /> <br />
-  <img src="./Assets/Image 3.2 - Malware connect domain.webp" alt="Malware connect domain" /> <br />
-  <img src="./Assets/Image 3.3 - Malware connect IP.webp" alt="Malware connect IP" /> <br />
+  <img src="./Assets/Image 3.1 - Malware connect URL.png" alt="Malware connect URL" /> <br />
+  <img src="./Assets/Image 3.2 - Malware connect domain.png" alt="Malware connect domain" /> <br />
+  <img src="./Assets/Image 3.3 - Malware connect IP.png" alt="Malware connect IP" /> <br />
   <em>Image 3: Malware connect with C2 server</em>
 </p>
 
@@ -51,7 +51,7 @@ From 5 domains are flagged in red color, there is only a registrar INC `NameChea
 
 From the mitre att&ck, the malware IcedID is used by group TA551 or `Gold Cabin`.
 <p align="center">
-  <img src="./Assets/Image 4 - Threat Actor linked to malware.webp" alt="Threat Actor linked to malware" /> <br />
+  <img src="./Assets/Image 4 - Threat Actor linked to malware.png" alt="Threat Actor linked to malware" /> <br />
   <em>Image 4: Threat Actor linked to malware</em>
 </p>
 
@@ -59,6 +59,6 @@ From the mitre att&ck, the malware IcedID is used by group TA551 or `Gold Cabin`
 
 From Behavior tab, the execution phase contain the function `URLDownloadToFileA`.
 <p align="center">
-  <img src="./Assets/Image 5 - Malware employ function to fetch extra payloads.webp" alt="Malware employ function to fetch extra payloads" /> <br />
+  <img src="./Assets/Image 5 - Malware employ function to fetch extra payloads.png" alt="Malware employ function to fetch extra payloads" /> <br />
   <em>Image 5: Malware employ function to fetch extra payloads</em>
 </p>

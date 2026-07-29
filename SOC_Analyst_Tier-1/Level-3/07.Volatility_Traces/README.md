@@ -17,8 +17,8 @@ To evade detection (MITRE sub-technique **T1562.001**), the malware executed the
 
 I was provided a `memory.dmp` and a `windows.psscan_out.txt` files. As I know there is a suspicious PowerShell processes, I check `windows.psscan_out.txt` file and found that there are 2 PowerShell processes with 2 PID `6980`, `7656` with the same PPID (parent process of PID) `4596`.
 <p align="center">
-  <img src="./Assets/Image 1.1 - PowerShell PID 1.webp" alt="PowerShell PID 1" /> <br />
-  <img src="./Assets/Image 1.2 - PowerShell PID 2.webp" alt="PowerShell PID 1" /> <br />
+  <img src="./Assets/Image 1.1 - PowerShell PID 1.png" alt="PowerShell PID 1" /> <br />
+  <img src="./Assets/Image 1.2 - PowerShell PID 2.png" alt="PowerShell PID 1" /> <br />
   <em>Image 1: PowerShell PID</em>
 </p>
 
@@ -26,27 +26,27 @@ So I check what is process with PID `4596`, there is `InvoiceCheckLi` image file
 
 Moreover, `InvolceCheckList.exe` process use legitimate PowerShell of host through `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe` to execute command `Add-MpPreference -ExclusionPath "C:\Users\Lee\AppData\Local\Temp\InvoiceCheckList.exe"`. Basically, this command add the file `InvoiceCheckList.exe` to the excusion list. The command disables Windows Defender scheduled and real-time scanning for this file.
 <p align="center">
-  <img src="./Assets/Image 2.1 - Parent Process of PowerShell.webp" alt="Parent Process of PowerShell" /> <br />
-  <img src="./Assets/Image 2.2 - Full name of parent process PowerShell.webp" alt="PPID of PowerShell" /> <br />
+  <img src="./Assets/Image 2.1 - Parent Process of PowerShell.png" alt="Parent Process of PowerShell" /> <br />
+  <img src="./Assets/Image 2.2 - Full name of parent process PowerShell.png" alt="PPID of PowerShell" /> <br />
   <em>Image 2: PPID of PowerShell</em>
 </p>
 
 And from the image above, I also know the `InvolceCheckList.exe` also executed `RegSvcs.exe`, `schtasks.exe` in `Windows\Microsoft.NET\Framework\v4.0.30319\` and `Windows\SysWOW64\` respectively.
 <p align="center">
-  <img src="./Assets/Image 3.1 - Other child processes of suspicious process.webp" alt="Other child processes of suspicious process" /> <br />
-  <img src="./Assets/Image 3.2 - Other child processes of suspicious process 2.webp" alt="Other child processes of suspicious process 2" /> <br />
+  <img src="./Assets/Image 3.1 - Other child processes of suspicious process.png" alt="Other child processes of suspicious process" /> <br />
+  <img src="./Assets/Image 3.2 - Other child processes of suspicious process 2.png" alt="Other child processes of suspicious process 2" /> <br />
   <em>Image 3: Other child processes of suspicious process</em>
 </p>
 
 Then I want to know attacker run any other command in PowerShell with `windows.cmdline` plugin. Beside `InvoiceCheckList.exe`, powershell also executed `HcdmIYYf.exe` process.
 <p align="center">
-  <img src="./Assets/Image 4 - Another command in PowerShell.webp" alt="Another command in PowerShell" /> <br />
+  <img src="./Assets/Image 4 - Another command in PowerShell.png" alt="Another command in PowerShell" /> <br />
   <em>Image 4: Another command in PowerShell</em>
 </p>
 
 Then I want to know the who run this process, so I use `windows.getsids` to discover SIDs owning `powershell.exe` process. There are `Administrators` and domain user `Lee` run `powershell.exe` process.
 <p align="center">
-  <img src="./Assets/Image 5 - SIDs run powershell process.webp" alt="SIDs run powershell process" /> <br />
+  <img src="./Assets/Image 5 - SIDs run powershell process.png" alt="SIDs run powershell process" /> <br />
   <em>Image 5: SIDs run powershell process</em>
 </p>
 

@@ -40,19 +40,19 @@ First, I filter `index=*` to see all fields in the Splunk. Then I know some file
 - 1 sourcetype `aws:cloudtrail`
 - 23 eventSource with `s3.amazonaws.com` is the most triggerd logs with `2 702` events, obtained about `67%`.
 <p align="center">
-	  <img src="./Assets/Image 1 - eventSource.webp" alt="eventSource" /> <br />
+	  <img src="./Assets/Image 1 - eventSource.png" alt="eventSource" /> <br />
   <em>Image 1: eventSource</em>
 </p>
 
 - 3 eventType. But I know that the security team has detected unusual activities from scenario. So I focus on sign-in activities.
 <p align="center">
-	  <img src="./Assets/Image 2 - eventType.webp" alt="eventType" /> <br />
+	  <img src="./Assets/Image 2 - eventType.png" alt="eventType" /> <br />
   <em>Image 2: eventType</em>
 </p>
 
 Then, I filter with `AwsConsoleSignIn` eventType. There are total 35 events and 12 people try to log-in through userIdentity.userName field. 
 <p align="center">
-	  <img src="./Assets/Image 3 - User log-in.webp" alt="User log-in" /> <br />
+	  <img src="./Assets/Image 3 - User log-in.png" alt="User log-in" /> <br />
   <em>Image 3: User log-in</em>
 </p>
 
@@ -60,13 +60,13 @@ I find user `helpdesk.luke` has 12 log-in activities. Quite suspicious because i
 
 I also see the errorMessage field. There is only `Failed authentication` value in 19/35 events.
 <p align="center">
-	  <img src="./Assets/Image 4 - Error mesage.webp" alt="Error mesage" /> <br />
+	  <img src="./Assets/Image 4 - Error mesage.png" alt="Error mesage" /> <br />
   <em>Image 4: Error mesage</em>
 </p>
 
 So I filter with this field with command `index=* eventType=AwsConsoleSignIn errorMessage="Failed authentication"`. Then I find 6 people failed at log-in.
 <p align="center">
-	  <img src="./Assets/Image 5 - User failed log-in.webp" alt="User failed log-in" /> <br />
+	  <img src="./Assets/Image 5 - User failed log-in.png" alt="User failed log-in" /> <br />
   <em>Image 5: User failed log-in</em>
 </p>
 
@@ -76,7 +76,7 @@ There is 480 events and all appear on `Thurday` (date_wday field) `11/02/2023`(d
 
 From evenSource, I find that he mostly access to `s3` and `iam`. After researching, I found some suspicious activities of `s3` and `iam`. But I will filter with source `s3` first.
 <p align="center">
-	  <img src="./Assets/Image 6 - eventSource potential compromised.webp" alt="eventSource potential compromised" /> <br />
+	  <img src="./Assets/Image 6 - eventSource potential compromised.png" alt="eventSource potential compromised" /> <br />
   <em>Image 6: eventSource potential compromised</em>
 </p>
 
@@ -112,19 +112,19 @@ There are 16 eventName and I will briefly describe below:
 
 So, to know what attacker did, I will filter with `eventName="GetObject"`. There are 8 events from `9:55` to `9:57` in `11/02/2023`. Then from requestParameters.key field - which represents the exact S3 object path (file name) that was affected by an AWS API request, such as uploading, deleting, or downloading a file - I find 8 files that attacker try to get.
 <p align="center">
-	  <img src="./Assets/Image 7 - requestParameters.key of attacker in S3.webp" alt="requestParameters.key of attacker in S3" /> <br />
+<img src="./Assets/Image 7 - requestParameters.key of attacker in S3.png" alt="requestParameters.key of attacker in S3" /> <br />
   <em>Image 7: Attacker try to get document in S3 bucket</em>
 </p>
 
 But I want to know detail about attacker activities, he just read or downloaded or modified anything, so I check for additionalEventData.bytesTransferredIn field.
 <p align="center">
-	  <img src="./Assets/Image 8 - DataIn.webp" alt="DataIn" /> <br />
+	  <img src="./Assets/Image 8 - DataIn.png" alt="DataIn" /> <br />
   <em>Image 8: DataIn</em>
 </p>
 
 The value is `0`, which means the attacker did not modified anything. Then I check field additionalEventData.bytesTransferredOut.
 <p align="center">
-	  <img src="./Assets/Image 9 - DataOut.webp" alt="DataOut" /> <br />
+	  <img src="./Assets/Image 9 - DataOut.png" alt="DataOut" /> <br />
   <em>Image 9: DataOut</em>
 </p>
 
@@ -168,14 +168,14 @@ When I filter with `eventSource="iam.amazonaws.com"`, there are 179 events from 
 
 So, through `CreateUser` field, I know that at `9:59:33`, user `helpdesk.luke` create a new user called `marketing.mark` and set password at `9:59:38`. 
 <p align="center">
-	  <img src="./Assets/Image 10.1 - Attacker create new user.webp" alt="Attacker create new user" /> <br/>
-	  <img src="./Assets/Image 10.2 - Attacker set password for new user.webp" alt="Attacker set password for new user" /> <br/>
+	  <img src="./Assets/Image 10.1 - Attacker create new user.png" alt="Attacker create new user" /> <br/>
+	  <img src="./Assets/Image 10.2 - Attacker set password for new user.png" alt="Attacker set password for new user" /> <br/>
   <em>Image 10: Attack create new user</em>
 </p>
 
 Then, at `9:59:38`, attacker add user `marketing.mark` into group `Admins`.
 <p align="center">
-	  <img src="./Assets/Image 11 - Attacker privilege attack.webp" alt="Attacker privilege attack" /> <br />
+	  <img src="./Assets/Image 11 - Attacker privilege attack.png" alt="Attacker privilege attack" /> <br />
   <em>Image 11: Attacker privilege attack</em>
 </p>
 
@@ -187,7 +187,7 @@ In `s3`, I check for `eventName="GetAccountPublicAccessBlock"`. With this field,
 
 It is 10 events and sadly, all 10 events appear `errorCode=NoSuchPublicAccessBlockConfiguration`.
 <p align="center">
-	  <img src="./Assets/Image 12 - Misconfiguration of security in account.webp" alt="Misconfiguration of security in account" /> <br />
+<img src="./Assets/Image 12 - Misconfiguration of security in account.png" alt="Misconfiguration of security in account" /> <br />
   <em>Image 12: Misconfiguration of security in account</em>
 </p>
 
@@ -197,7 +197,7 @@ At this point, I think attacker will check for any public bucket so that he can 
 
 Then, in switch to check in `iam`, But I also don not find anything special in here. Every API call I checked returned a null value. The only thing I can find is that user `helpdesk.luke` do not use 2-layer MFA authentication.
 <p align="center">
-	  <img src="./Assets/Image 13 - User luke do not user MFA authentication.webp" alt="User luke do not user MFA authentication" /> <br />
+<img src="./Assets/Image 13 - User luke do not user MFA authentication.png" alt="User luke do not user MFA authentication" /> <br />
   <em>Image 13: User luke do not user MFA authentication</em>
 </p>
 

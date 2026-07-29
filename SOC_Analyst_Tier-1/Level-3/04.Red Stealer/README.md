@@ -19,7 +19,7 @@ The malware was designed to collect sensitive data from the local system (MITRE 
 
 From VirusTotal, Microsoft categorised this malware as `Trojan:Win32/Redline!rfn`
 <p align="center">
-  <img src="./Assets/Image 1. Microsoft categorise malware.webp" alt="Microsoft categorise malware" /> <br />
+  <img src="./Assets/Image 1. Microsoft categorise malware.png" alt="Microsoft categorise malware" /> <br />
   <em>Image 1: Microsoft categorise malware</em>
 </p>
 
@@ -27,7 +27,7 @@ From VirusTotal, Microsoft categorised this malware as `Trojan:Win32/Redline!rfn
 
 From the `Details` tab, `Names` category, I found other name of this malware `WexTract`.
 <p align="center">
-  <img src="./Assets/Image 2 - Other name of malware.webp" alt="Other name of malware" /> <br />
+  <img src="./Assets/Image 2 - Other name of malware.png" alt="Other name of malware" /> <br />
   <em>Image 2: Other name of malware</em>
 </p>
 
@@ -35,7 +35,7 @@ From the `Details` tab, `Names` category, I found other name of this malware `We
 
 From `Details` tab, `History` category, I know the UTC timestamp of malware's first submission is `2023-10-06 04:41:50 UTC`.
 <p align="center">
-  <img src="./Assets/Image 3 - Malware's first submission timestamps.webp" alt="Malware's first submission timestamps" /> <br />
+  <img src="./Assets/Image 3 - Malware's first submission timestamps.png" alt="Malware's first submission timestamps" /> <br />
   <em>Image 3: Malware's first submission timestamps</em>
 </p>
 
@@ -43,7 +43,7 @@ From `Details` tab, `History` category, I know the UTC timestamp of malware's fi
 
 To know the MITRE ATT&CK technique ID for the malware's data collection, I check `Behavior` tab and found `T1005 - Data From Local System` from `Collection` tactic.
 <p align="center">
-  <img src="./Assets/Image 4 - Mitre att&ck technique ID for malware's data collection.webp" alt="Mitre att&ck technique ID for malware's data collection" /> <br />
+  <img src="./Assets/Image 4 - Mitre att&ck technique ID for malware's data collection.png" alt="Mitre att&ck technique ID for malware's data collection" /> <br />
   <em>Image 4: Mitre att&ck technique ID for malware's data collection</em>
 </p>
 
@@ -51,7 +51,7 @@ To know the MITRE ATT&CK technique ID for the malware's data collection, I check
 
 I search from `Contacted Domains` category to find every domain the malware resolve. And I found the social media-related domain is `facebook.com`.
 <p align="center">
-  <img src="./Assets/Image 5 - Domain names that the malware resolve via DNS query.webp" alt="Domain names that the malware resolve via DNS query" /> <br />
+  <img src="./Assets/Image 5 - Domain names that the malware resolve via DNS query.png" alt="Domain names that the malware resolve via DNS query" /> <br />
   <em>Image 5: Domain names that the malware resolve via DNS query</em>
 </p>
 
@@ -59,7 +59,7 @@ I search from `Contacted Domains` category to find every domain the malware reso
 
 I search for `IP Traffic` category, which represent IP traffic when executing the fiels being studied. There are many IP traffic was recorded based on different vendor. But the first one `77.91.124.55:19071` seems like more public because 3 vendors (C2AE, VMRAY, ZENBOX) recorded it.
 <p align="center">
-  <img src="./Assets/Image 6 - Recorded IP traffic.webp" alt="Recorded IP traffic" /> <br />
+  <img src="./Assets/Image 6 - Recorded IP traffic.png" alt="Recorded IP traffic" /> <br />
   <em>Image 6: Recorded IP traffic</em>
 </p>
 
@@ -67,7 +67,7 @@ I search for `IP Traffic` category, which represent IP traffic when executing th
 
 Search in MalwareBazaar follow their search syntax `sha256:248FCC901AFF4E4B4C48C91E4D78A939BF681C9A1BC24ADDC3551B32768F907B`, there is only 1 result by reporter `abuse_ch`. And from the `YARA` category, the rule that created by "Varp0s" is `detect_Redline_Stealer`.
 <p align="center">
-  <img src="./Assets/Image 7 - YARA rule by Varp0s.webp" alt="YARA rule by Varp0s" /> <br />
+  <img src="./Assets/Image 7 - YARA rule by Varp0s.png" alt="YARA rule by Varp0s" /> <br />
   <em>Image 7: YARA rule by Varp0s</em>
 </p>
 
@@ -75,13 +75,13 @@ Search in MalwareBazaar follow their search syntax `sha256:248FCC901AFF4E4B4C48C
 
 Following the search syntax in ThreatFox, I search for malware name that I know in MalwareBazaar `malware:RedLine`. There are so many result but I go to 1 of 2 IOC below because it has the same reporter `abuse_ch` with MalwareBazaar above.
 <p align="center">
-  <img src="./Assets/Image 8 - result of malware in ThreatFox.webp" alt="result of malware in ThreatFox" /> <br />
+  <img src="./Assets/Image 8 - result of malware in ThreatFox.png" alt="result of malware in ThreatFox" /> <br />
   <em>Image 8: result of malware in ThreatFox</em>
 </p>
 
 Then I know the different malware alias associated with malicious IP address is `RECORDSTEALER`.
 <p align="center">
-  <img src="./Assets/Image 9 - Different malware alias.webp" alt="Different malware alias" /> <br />
+  <img src="./Assets/Image 9 - Different malware alias.png" alt="Different malware alias" /> <br />
   <em>Image 9: Different malware alias</em>
 </p>
 
@@ -89,6 +89,6 @@ Then I know the different malware alias associated with malicious IP address is 
 
 Back to Virustotal, from `Details` tab, `Imports` category, there are many DLLs, but the first one have `AdjustTokenPrivileges` and `LookupPrivilegeValueA` description. So, malware use the `ADVAPI32.dll` for privilege escalation. 
 <p align="center">
-  <img src="./Assets/Image 10 - DLLs for privilege escaltion.webp" alt="DLLs for privilege escaltion" /> <br />
+  <img src="./Assets/Image 10 - DLLs for privilege escaltion.png" alt="DLLs for privilege escaltion" /> <br />
   <em>Image 10: DLLs for privilege escaltion</em>
 </p>

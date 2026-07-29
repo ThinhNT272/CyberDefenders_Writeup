@@ -16,7 +16,7 @@ The PCAP file contains 33.279 packets from `07:45:15` to `08:26:30` in `2024-06-
 
 At first, from the packet no 1, I know the internal server is `172.31.25.119`.
 <p align="center">
-  <img src="./Assets/Image 1 - Server connect SSH.webp" alt="Server connect SSH" /> <br />
+  <img src="./Assets/Image 1 - Server connect SSH.png" alt="Server connect SSH" /> <br />
   <em>Image 1: Server connect SSH</em>
 </p>
 

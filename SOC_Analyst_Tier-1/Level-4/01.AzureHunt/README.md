@@ -49,13 +49,13 @@ The ELK contains 348 events from `2023-10-05` to `2023-10-06`.
 
 As I know there are an alert of multiple failed login attempts from an unfamiliar geographic location, so I filter with field `azure.signinlogs.properties.token_issuer_type` that contains 159 events of AzureAD. These logs capture authentication and authorization events, providing insights into login attempts and credential usage. I also add field `event.action.keyword: Sign-in activity` `event.outcome.keyword: failure` to idenfy who is the most failed login attempts.
 <p align="center">
-  <img src="./Assets/Image 1 - Failed login attempts.webp" alt="Failed login attempts" /> <br />
+  <img src="./Assets/Image 1 - Failed login attempts.png" alt="Failed login attempts" /> <br />
   <em>Image 1: Failed login attempts</em>
 </p>
 
  There are nothing suspicious here, all login attemps are not different significantly. So I filter with another way that find an unfamiliar geographic location.
  <p align="center">
-  <img src="./Assets/Image 2 - Unfamiliar geographic location.webp" alt="Unfamiliar geographic location" /> <br />
+  <img src="./Assets/Image 2 - Unfamiliar geographic location.png" alt="Unfamiliar geographic location" /> <br />
   <em>Image 2: Unfamiliar geographic location</em>
 </p>
 
@@ -63,13 +63,13 @@ From the image above, there are 2 unfamiliar geographic location Germany with 26
 
 But when I filter with log-in activities like above, I cannot find any failed log-in action. All the log-in activities from Germany is successfull, it is not match the scenario. All the failed log-in attempt are come from United States at about. In my opinion, this is because attacker use something like VPN from US when he try to brute-force, and when he has the credentials, he switch to VPN from Germany and access the system.
 <p align="center">
-  <img src="./Assets/Image 3 - No failed sign-in act in Germany.webp" alt="No failed sign-in act in Germany" /> <br />
+  <img src="./Assets/Image 3 - No failed sign-in act in Germany.png" alt="No failed sign-in act in Germany" /> <br />
   <em>Image 3: No failed sign-in action in Germany</em>
 </p>
 
 And from 13 events, there are 3 users  `IT Admin`, `IT Support`, `alice` has sign-in activities. There 3 suspicious accounts.
 <p align="center">
-  <img src="./Assets/Image 4 - Suspicious users.webp" alt="Suspicious users" /> <br />
+  <img src="./Assets/Image 4 - Suspicious users.png" alt="Suspicious users" /> <br />
   <em>Image 4: Suspicious users</em>
 </p>
 
@@ -80,13 +80,13 @@ source.geo.country_name.keyword: "Germany"  and event.action.keyword : "MICROSOF
 ```
 
 <p align="center">
-  <img src="./Assets/Image 5 - Attacker compromised admin account.webp" alt="Attacker compromised admin account" /> <br />
+  <img src="./Assets/Image 5 - Attacker compromised admin account.png" alt="Attacker compromised admin account" /> <br />
   <em>Image 5: Attacker compromised admin account</em>
 </p>
 
 Then I want to know everything the account `IT Admin` did in the system beside the start virtual machine activity. And I got this.
 <p align="center">
-  <img src="./Assets/Image 6 - Attacker actions.webp" alt="Attacker actions" /> <br />
+  <img src="./Assets/Image 6 - Attacker actions.png" alt="Attacker actions" /> <br />
   <em>Image 6: Attacker actions</em>
 </p>
 
@@ -96,7 +96,7 @@ Then I want to know everything the account `IT Admin` did in the system beside t
 
 - `Oct 5, 2023 15:33` - `MICROSOFT.STORAGE/STORAGEACCOUNTS/LISTKEYS/ACTION`: This action list Access Key of Storage Account. This Access Key help user fully read/write data in Storage Account. The target is group `RSS1` in storage accoutn `CACTUSSTORAGE2023`.
 <p align="center">
-  <img src="./Assets/Image 7 - Target storage.webp" alt="Target storage" /> <br />
+  <img src="./Assets/Image 7 - Target storage.png" alt="Target storage" /> <br />
   <em>Image 7: Target storage</em>
 </p>
 
@@ -104,7 +104,7 @@ Then I want to know everything the account `IT Admin` did in the system beside t
 
 - `Oct 5, 2023 15:44` - `MICROSOFT.AUTHORIZATION/ROLEASSIGNMENTS/WRITE`: This action add a role to an object (user, group, ...) in Azure RBAC (Role-Based Access Control). Attacker add role `Owner` with scope is entire subcription to an account has id `99000683-91fc-40ea-b942-87868f0eadcd`.
 <p align="center">
-  <img src="./Assets/Image 8 - Attacker prepare persistent attack.webp" alt="Attacker prepare persistent attack" /> <br />
+  <img src="./Assets/Image 8 - Attacker prepare persistent attack.png" alt="Attacker prepare persistent attack" /> <br />
   <em>Image 8: Attacker prepare persistent attack</em>
 </p>
 
@@ -113,7 +113,7 @@ This is a common tactic, attacker create a fake credentials and add highest perm
 
 So I got 8 events as the image 9 below.
 <p align="center">
-  <img src="./Assets/Image 9 - Fake credential action.webp" alt="Fake credential action" /> <br />
+  <img src="./Assets/Image 9 - Fake credential action.png" alt="Fake credential action" /> <br />
   <em>Image 9: Fake credential action</em>
 </p>
 
@@ -125,7 +125,7 @@ Moreover, I found some failed sign-in activity from account "IT Admin" at about 
 
 In here, I relize that 2 accoutns "IT Admin" or "IT Support" above don't have any activity access to sensitive Blob Storage file as Scenario. So I search for `blob` in entire logs, and I found account `alice`. 
 <p align="center">
-  <img src="./Assets/Image 10 - Alice access Blob.webp" alt="Alice access Blob" /> <br />
+  <img src="./Assets/Image 10 - Alice access Blob.png" alt="Alice access Blob" /> <br />
   <em>Image 10: Alice access Blob</em>
 </p>
 
@@ -154,7 +154,7 @@ After filtering, in `Oct 5, 2023`, the system recorded a anormal sign-in action 
 - `14:31:11` (Error Code 50072) - `Due to a configuration change by your administrator, or because you moveed to a new location, you must enroll in multi-factor authentication to access the tenant (MFA required in Azure AD)`.
 
 <p align="center">
-  <img src="./Assets/Image 11 - Attacker access account alice.webp" alt="Attacker access account alice" /> <br />
+  <img src="./Assets/Image 11 - Attacker access account alice.png" alt="Attacker access account alice" /> <br />
   <em>Image 11: Attacker access account alice</em>
 </p>
 
@@ -164,7 +164,7 @@ However, attacker still by pass the protection and access the system, evidence i
 
 Then I go back to answer the question how attacket can get account "IT Admin" above. Based on timeline and the accoutn "IT Admin" activities, at `Oct 5, 2023 15:23`, after attacker get file `service-config.ps1`, there is an successful authentication. So in my opinion, there is an account's credentials of "IT Admin" in the file `service-config.ps1`.
 <p align="center">
-  <img src="./Assets/Image 12 - Attacker access account IT Admin.webp" alt="Attacker access account IT Admin" /> <br />
+  <img src="./Assets/Image 12 - Attacker access account IT Admin.png" alt="Attacker access account IT Admin" /> <br />
   <em>Image 12: Attacker access account IT Admin</em>
 </p>
 

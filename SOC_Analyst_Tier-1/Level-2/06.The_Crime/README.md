@@ -19,7 +19,7 @@ Discord chat logs further revealed that the victim had arranged to meet a friend
 
 After using ALEAPP to analyze the Android log folder, I got a report. Going to the Installed Apps category, I found that the victim used `olymptrade` for trading, and it also shows the SHA256 hash of the application `4f168a772350f283a1c49e78c1548d7c2c6c05106d8b9feb825fdc3466e9df3c`.
 <p align="center">
-  <img src="./Assets/Image 1 - Trading app.webp" alt="Trading app" /><br>
+  <img src="./Assets/Image 1 - Trading app.png" alt="Trading app" /><br>
   <em>Image 1: Trading app</em>
 </p>
 
@@ -27,13 +27,13 @@ After using ALEAPP to analyze the Android log folder, I got a report. Going to t
 
 From the Call Logs category, I can see that the victim avoided calls from `+201172137258`.
 <p align="center">
-  <img src="./Assets/Image 2 - The victim's creditor.webp" alt="The victim's creditor" /><br>
+  <img src="./Assets/Image 2 - The victim's creditor.png" alt="The victim's creditor" /><br>
   <em>Image 2: The victim's creditor</em>
 </p>
 
 And from the "SMS & MMS" category, I found that the victim owes the caller about `250,000 EGP`.
 <p align="center">
-  <img src="./Assets/Image 3 - The victim's creditor SMS.webp" alt="The victim's creditor SMS" /><br>
+  <img src="./Assets/Image 3 - The victim's creditor SMS.png" alt="The victim's creditor SMS" /><br>
   <em>Image 3: The victim's creditor SMS</em>
 </p>
 
@@ -41,7 +41,7 @@ And from the "SMS & MMS" category, I found that the victim owes the caller about
 
 From the "Contacts" category, I identified the victim's creditor as `Shady Wahab`.
 <p align="center">
-  <img src="./Assets/Image 4 - Name of victim's creditor.webp" alt="Name of victim's creditor" /><br>
+  <img src="./Assets/Image 4 - Name of victim's creditor.png" alt="Name of victim's creditor" /><br>
   <em>Image 4: Name of victim's creditor</em>
 </p>
 
@@ -49,7 +49,7 @@ From the "Contacts" category, I identified the victim's creditor as `Shady Wahab
 
 To know where the victim located at that moment, I need some information like GPS, something like that. So, I check all the category, through all the pages and I found this information at Recent Activity category.
 <p align="center">
-  <img src="./Assets/Image 5 - Google map information.webp" alt="Google map information" /><br>
+  <img src="./Assets/Image 5 - Google map information.png" alt="Google map information" /><br>
   <em>Image 5: Google map information</em>
 </p>
 
@@ -59,7 +59,7 @@ So, the victim used google map on that day. There also has a snapshot image belo
 
 The victim stored the ticket in the Image Manager Cache category, which shows that the victim had a flight scheduled from Cairo to `Las Vegas`.
 <p align="center">
-  <img src="./Assets/Image 6 - Flight ticket.webp" alt="Flight ticket" /><br>
+  <img src="./Assets/Image 6 - Flight ticket.png" alt="Flight ticket" /><br>
   <em>Image 6: Flight ticket</em>
 </p>
 
@@ -67,6 +67,6 @@ The victim stored the ticket in the Image Manager Cache category, which shows th
 
 At the Discord Chats category, the victim friend with user name rob1ns0n wanted to meet the victim at `The Mob Museum`.
 <p align="center">
-  <img src="./Assets/Image 7 - Meeting destination.webp" alt="Meeting destination" /><br>
+  <img src="./Assets/Image 7 - Meeting destination.png" alt="Meeting destination" /><br>
   <em>Image 7: Meeting destination</em>
 </p>

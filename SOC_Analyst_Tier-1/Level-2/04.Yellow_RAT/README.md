@@ -17,13 +17,13 @@ The malware `Yellow Cockatoo RAT`, compiled on `2020-09-24 18:26:47 UTC` and fir
 
 From the Graph Summary category, go to see full graph and I found this.
 <p align="center">
-  <img src="Image 1 - RAT collection from graph view.webp" alt="RAT collection from graph view" /> <br />
+  <img src="Image 1 - RAT collection from graph view.png" alt="RAT collection from graph view" /> <br />
   <em>Image 1: RAT collection from graph view</em>
 </p>
 
 Then I look at the name of the lab `Yellow RAT Lab`, so maybe `Yellow Cockatoo RAT` is correct answer. But I need to verify that by click the Source Link. From the page, there list the IoCs and I found the hash of malware in that list. So, the malware is `Yellow Cockatoo RAT.
 <p align="center">
-  <img src="Image 2 - IoCs of malware.webp" alt="IoCs of malware view" /> <br />
+  <img src="Image 2 - IoCs of malware.png" alt="IoCs of malware view" /> <br />
   <em>Image 2: IoCs of malware</em>
 </p>
 
@@ -31,7 +31,7 @@ Then I look at the name of the lab `Yellow RAT Lab`, so maybe `Yellow Cockatoo R
 
 I found these files name in Detail tab, Names category. There are several files but only 1 match the format. This is `111bc461-1ca8-43c6-97ed-911e0e69fdf8.dll`.
 <p align="center">
-  <img src="Image 3 - File name.webp" alt="File name" /> <br />
+  <img src="Image 3 - File name.png" alt="File name" /> <br />
   <em>Image 3: File name</em>
 </p>
 
@@ -41,7 +41,7 @@ Compilation timestamp is also called as creation timestamp because it is a value
 
 So, the compilation timestamp of the malware that infected out network is `2020-09-24 18:26:47 UTC`.
 <p align="center">
-  <img src="Image 4 - Compilation timestamp.webp" alt="Compilation timestamp" /> <br />
+  <img src="Image 4 - Compilation timestamp.png" alt="Compilation timestamp" /> <br />
   <em>Image 4: Compilation timestamp</em>
 </p>
 
@@ -53,13 +53,13 @@ From the image 4 above, I found that the first submitted of the malware to Virus
 
 I check File system actions category and it has Files Dropped. But it seems not match the requirement. 
 <p align="center">
-  <img src="Image 5 - File system actions.webp" alt="File system actions" /> <br />
+  <img src="Image 5 - File system actions.png" alt="File system actions" /> <br />
   <em>Image 5: File system actions</em>
 </p>
 
 So, I decide to search from the Internet and found this report of [Red Canary](https://redcanary.com/blog/threat-intelligence/yellow-cockatoo/) that mention exactly what I need.
 <p align="center">
-  <img src="Image 6 - Red Canary report.webp" alt="Red Canary report" /> <br />
+  <img src="Image 6 - Red Canary report.png" alt="Red Canary report" /> <br />
   <em>Image 6: Red Canary report</em>
 </p>
 

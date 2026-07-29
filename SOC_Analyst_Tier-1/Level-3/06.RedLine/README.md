@@ -33,7 +33,7 @@ Then I use `windows.pstree` to know the process that execute the malware, the ma
 
 Moreoever, the malware with PID `5896` also run a `rundll32.exe` (PID `7732`) process.
 <p align="center">
-  <img src="./Assets/Image 1 - Malware execure sub process.webp" alt="Malware execure sub process" /> <br />
+  <img src="./Assets/Image 1 - Malware execure sub process.png" alt="Malware execure sub process" /> <br />
   <em>Image 1: Malware execure sub process</em>
 </p>
 
@@ -43,13 +43,13 @@ I use plugin `windows.cmdline` to know the command line that run the malware but
 
 Then, I want to know what the malware did in the system. I will use plugin `windows.netscan` to see the malware connect to C2 server or not. And I found this, the malware connect to the IP `77.91.124.20` in `2023-05-21 23:01:22`.
 <p align="center">
-  <img src="./Assets/image 2 - Malware connect to C2 server.webp" alt="Malware connect to C2 server" /> <br />
+  <img src="./Assets/image 2 - Malware connect to C2 server.png" alt="Malware connect to C2 server" /> <br />
   <em>Image 2: Malware connect to C2 server</em>
 </p>
 
 Moreoever, I also found this the suspicious process called `tun2socsk.exe` that ran in about `2023-05-21 23:00`. After searching from the internet ([tun2socks.exe Windows process - What is it?](https://www.file.net/process/tun2socks.exe.html)), I know this file is a part of the software package associated with VPN services called `outline.exe`.
 <p align="center">
-  <img src="./Assets/Image 3 - VPN process.webp" alt="VPN process" /> <br />
+  <img src="./Assets/Image 3 - VPN process.png" alt="VPN process" /> <br />
   <em>Image 3: VPN process</em>
 </p>
 
@@ -57,13 +57,13 @@ And from the image 2, I know that the IP `33.121.43.65` connect to host through 
 
 Continue with malware, I use `windows.vadinfo` to know details about memory mappings. So the malware have `PAGE_EXECUTE_READWRITE` protection.
 <p align="center">
-  <img src="./Assets/Image 4 - Memory mappings of the malware.webp" alt="Memory mappings of the malware" /> <br />
+  <img src="./Assets/Image 4 - Memory mappings of the malware.png" alt="Memory mappings of the malware" /> <br />
   <em>Image 4: Memory mappings of the malware</em>
 </p>
 
 Then I use `strings` and ound that the attacker accessed to these files below. 
 <p align="center">
-  <img src="./Assets/Image 5 - Attacker access files.webp" alt="Attacker access files" /> <br />
+  <img src="./Assets/Image 5 - Attacker access files.png" alt="Attacker access files" /> <br />
   <em>Image 5: Attacker access files</em>
 </p>
 

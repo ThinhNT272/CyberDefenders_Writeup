@@ -19,17 +19,17 @@ This malicious script was executed using **Wscript.Shell.exe**, which then conta
 
 This PCAP file records network traffic from `23:25:53` to `23:50:17` on `2024-02-14`, contain `13 900` packets with `39` different IP addresses. The main type of network traffic is `TLS` with `6.8%` of all packets.
 <p align="center">
-  <img src="./Assets/Image 1 - All IP addresses.webp" alt="All IP addresses" /> <br />
+  <img src="./Assets/Image 1 - All IP addresses.png" alt="All IP addresses" /> <br />
   <em>Image 1: All IP addresses</em>
 </p>
 
 <p align="center">
-  <img src="./Assets/Image 2 - Protocols hierachy.webp" alt="Protocols hierachy" /> <br />
+  <img src="./Assets/Image 2 - Protocols hierachy.png" alt="Protocols hierachy" /> <br />
   <em>Image 2: Protocols hierachy</em>
 </p>
 
 When openning the pcap file, I can see at `23:25` the host `10.2.14.1` sent DNS request of a `portfolio.serveirc.com`. However the mistyped domain name, host still received an IP `62.173.142.148` as its domain.<p align="center">
-  <img src="./Assets/Image 3 - Connect to fake domain because of mistyped query.webp" alt="Connect to fake domain because of mistyped query" /> <br />
+  <img src="./Assets/Image 3 - Connect to fake domain because of mistyped query.png" alt="Connect to fake domain because of mistyped query" /> <br />
   <em>Image 3: Connect to fake domain because of mistyped query</em>
 </p>
 
@@ -42,14 +42,14 @@ MD5: 5daf53bf848bb4cda008a655bdecf425
 
 Then, I check this hash value in Virustotal and it is absolutely a malware.
 <p align="center">
-  <img src="./Assets/Image 4 - Check file in Virustotal.webp" alt="Check file in Virustotal" /> <br />
+  <img src="./Assets/Image 4 - Check file in Virustotal.png" alt="Check file in Virustotal" /> <br />
   <em>Image 4: Check file in Virustotal</em>
 </p>
 
 Basically, this malware called `login.php` or `allegato_708.js` can connect to C2 server  `104.21.33.40` or `74.125.69.94`. It also can connect to domain `soundata.top` and download file `resources.dll`.
 <p align="center">
-  <img src="./Assets/Image 5.1 - Name of malware.webp" alt="Name of malware" /> <br />
-  <img src="./Assets/Image 5.2 - Malware's behavior.webp" alt="Malware's behavior" /> <br />
+  <img src="./Assets/Image 5.1 - Name of malware.png" alt="Name of malware" /> <br />
+  <img src="./Assets/Image 5.2 - Malware's behavior.png" alt="Malware's behavior" /> <br />
   <em>Image 5: Malware's information and behavior</em>
 </p>
 
@@ -85,7 +85,7 @@ From the code above, I can see `var _0x1e16b0 = WScript.CreateObject("Wscript.Sh
 
 Then, as I said above about behavior of malware. At `23:26:58`, the host `188.114.97.3` request to url `http://soundata.top/resources.dll`.
 <p align="center">
-  <img src="./Assets/Image 6 - Malware download dll file.webp" alt="Malware download dll file" /> <br />
+  <img src="./Assets/Image 6 - Malware download dll file.png" alt="Malware download dll file" /> <br />
   <em>Image 6: Malware download dll file</em>
 </p>
 

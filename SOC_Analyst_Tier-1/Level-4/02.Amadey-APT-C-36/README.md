@@ -156,7 +156,7 @@ To know more about the hostname or user, I will see registry of file. So I colle
 
 From the list above, I know I need to use this plugin `windows.pstree.PsTree`. So, I found the suspicious executable file called `rundll32.exe`. And its parent is `lssass.exe` with PID `2748`. This process ran at `21:33` on `2023-08-09`.
 <p align="center">
-  <img src="Image 1 - Parent process of malware.webp" alt="Parent process of malware" /> <br />
+  <img src="Image 1 - Parent process of malware.png" alt="Parent process of malware" /> <br />
   <em>Image 1: Parent process of malware</em>
 </p>
 
@@ -164,7 +164,7 @@ From the list above, I know I need to use this plugin `windows.pstree.PsTree`. S
 
 Usually the command line to run the file will contain the directory of that file. So I check with plugin `windows.cmdline`.
 <p align="center">
-  <img src="Image 2 - Malware directory.webp" alt="Malware directory" /> <br />
+  <img src="Image 2 - Malware directory.png" alt="Malware directory" /> <br />
   <em>Image 2: Malware directory</em>
 </p>
 
@@ -176,7 +176,7 @@ And from that, I know the malicious user is `0XSH3R~1`.
 
 The malware will open port back to the C2 server so I check the network with plugin `windows.netscan`. So I foudn that the `lssass.exe` connect from `192.168.195.136:49168` (victim IP) to `41.75.84.12:80` (C2 server).
 <p align="center">
-  <img src="Image 3 - C2 server.webp" alt="C2 server" /> <br />
+  <img src="Image 3 - C2 server.png" alt="C2 server" /> <br />
   <em>Image 3: C2 server</em>
 </p>
 
@@ -186,7 +186,7 @@ To know how many distinct files is the malicious process trying to bring onto th
 
 Then I know the C2 server connects to this process through port `80`, represent they use HTTP to control the malware. Then I can filter the `pid.2748.pmd` file with `GET` method.
 <p align="center">
-  <img src="Image 4 - Files added to workstation.webp" alt="Files added to workstation" /> <br />
+  <img src="Image 4 - Files added to workstation.png" alt="Files added to workstation" /> <br />
   <em>Image 4: Files added to workstation</em>
 </p>
 
@@ -196,7 +196,7 @@ Malware bring `2` files (`cred64.dll` and `clip64.dll`) onto workstation.
 
 To see full path of file, I filter `python3 vol.py -f /home/ubuntu/Desktop/Start\ here/Artifacts/Windows\ 7\ x64-Snapshot4.vmem windows.filescan > filescan.txt`. Then use grep command to find specific files.
 <p align="center">
-  <img src="Image 5 - Full path of downloaded file.webp" alt="Full path of downloaded file" /> <br />
+  <img src="Image 5 - Full path of downloaded file.png" alt="Full path of downloaded file" /> <br />
   <em>Image 5: Full path of downloaded file</em>
 </p>
 
@@ -210,7 +210,7 @@ From image 2 above, I can see that `rundll32.exe` is  the process that execute t
 
 To know where the malware `lssass.exe` loacte for ensuring the persistence mechanisms, I use the `filescan.txt` from the previous step.
 <p align="center">
-  <img src="Image 6 - Malware location.webp" alt="Malware location" /> <br />
+  <img src="Image 6 - Malware location.png" alt="Malware location" /> <br />
   <em>Image 6: Malware location</em>
 </p>
 

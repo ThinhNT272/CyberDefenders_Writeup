@@ -17,18 +17,18 @@ The attacker first pivoted to **SALES-PC** (**10.0.0.133**) by connecting to the
 
 First, I check all IPv4 addresses and all protocols exist in the PCAP file.
 <p align="center">
-  <img src="./Assets/Image 1 - All Ipv4 addresses.webp" alt="All Ipv4 addresses" /> <br />
+  <img src="./Assets/Image 1 - All Ipv4 addresses.png" alt="All Ipv4 addresses" /> <br />
   <em>Image 1: All Ipv4 addresses</em>
 </p>
 
 <p align="center">
-  <img src="./Assets/Image 2 - All protocols.webp" alt="All protocols" /> <br />
+  <img src="./Assets/Image 2 - All protocols.png" alt="All protocols" /> <br />
   <em>Image 2: All protocols</em>
 </p>
 
 After searching, I found the packet no 132. The `10.0.0.130:49696` connected to `10.0.0.133:445` via SMB2 protocol under account `ssales` in host `HR-PC`. Then, `10.0.0.130` accessed to `IPC$` and `ADMIN$` folder, both requests are success because I found a `NT Status: STUSTUS_SUCCESS` in both reponse packets.
 <p align="center">
-  <img src="./Assets/Image 3 - Initial access.webp" alt="Initial access" /> <br />
+  <img src="./Assets/Image 3 - Initial access.png" alt="Initial access" /> <br />
   <em>Image 3: Initial access</em>
 </p>
 
@@ -38,25 +38,25 @@ After searching, I found the packet no 132. The `10.0.0.130:49696` connected to 
 
 Then in the packet 140, `10.0.0.130` request to open the `ADMIN$` folder. This is an exploratory step. `10.0.0.130`, attacker want to make sure the `ADMIN$` folder exist.
 <p align="center">
-  <img src="./Assets/Image 4 - Exploratory phase.webp" alt="Exploratory phase" /> <br />
+  <img src="./Assets/Image 4 - Exploratory phase.png" alt="Exploratory phase" /> <br />
   <em>Image 4: Exploratory phase</em>
 </p>
 
 Then, `10.0.0.130` create `PSEXESVC.exe` file in `ADMIN$` folder.
 <p align="center">
-  <img src="./Assets/Image 5 - Upload PSEXESVC.exe.webp" alt="Upload PSEXESVC.exe" /> <br />
+  <img src="./Assets/Image 5 - Upload PSEXESVC.exe.png" alt="Upload PSEXESVC.exe" /> <br />
   <em>Image 5: Upload PSEXESVC.exe</em>
 </p>
 
 Then, to follow this traffic, I filtered with `ip.addr == 10.0.0.130`. After create a file, `10.0.0.130` want to write data into that file through `write request`.
 <p align="center">
-  <img src="./Assets/Image 6 - Another file.webp" alt="Another file" /> <br />
+  <img src="./Assets/Image 6 - Another file.png" alt="Another file" /> <br />
   <em>Image 6: Another file</em>
 </p>
 
 After attacker closed the `PSEXESVC.exe` file, I found the DCERPC protocol from attacker.
 <p align="center">
-  <img src="./Assets/Image 7 - Run the PSEXECSVC.exe.webp" alt="Run the PSEXECSVC.exe" /> <br />
+  <img src="./Assets/Image 7 - Run the PSEXECSVC.exe.png" alt="Run the PSEXECSVC.exe" /> <br />
   <em>Image 7: Run the PSEXECSVC.exe</em>
 </p>
 
@@ -66,7 +66,7 @@ It proved that the attacker ran the `PSEXECSVC.exe` program by using DCE/RPC pro
 
 Then, attacker also created and writed the file `PSEXEC-HR-PC-1C6C5D14.key` in the `ADMIN$` folder. As I understand, the attacker want `PSEXEC.exe` use this key so that the he and system can communicate to each other.
 <p align="center">
-  <img src="./Assets/Image 8 - Create file.key.webp" alt="Create file.key" /> <br />
+  <img src="./Assets/Image 8 - Create file.key.png" alt="Create file.key" /> <br />
   <em>Image 8: Create file.key</em>
 </p>
 

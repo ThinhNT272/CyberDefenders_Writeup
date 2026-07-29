@@ -36,7 +36,7 @@ index=* "log.file.path"="C:\\evtx\\Sysmon.evtx"
 
 There a suspicious process `C:\Users\Administrator\Downloads\facebook assistant.exe` and suspicious script `C:\Program Files\Graphviz\Clear_Event_Viewer_Logs.bat`. 
 <p align="center">
-  <img src="./Assets/Image 1 - Suspicious files.webp" alt="Suspicious files" /> <br />
+  <img src="./Assets/Image 1 - Suspicious files.png" alt="Suspicious files" /> <br />
   <em>Image 1: Suspicious files</em>
 </p>
 
@@ -50,7 +50,7 @@ Then, I found the field `winlog.event_data.TargetFilename` - specific field that
 
 After querying, at about `04:10 PM` there are so many file `5uizv5660t-readme.txt` was created (`event.code=11`) by malicious process and was stored in various directory. Based on the name of the file, I can know there are ransom notes - which guide user to pay for their documents. 
 <p align="center">
-  <img src="./Assets/Image 2 - Ransom notes.webp" alt="Ransom notes" /> <br />
+  <img src="./Assets/Image 2 - Ransom notes.png" alt="Ransom notes" /> <br />
   <em>Image 2: Ransom notes</em>
 </p>
 
@@ -78,7 +78,7 @@ index=* "facebook assistant.exe" event.code=1
 
 I check hash of 2 processes, the first one just a powershell, nothing special, but the second one (`facebook assistant.exe`) is flagged as malicious by `66/71` vendors. Moreover, I also know the PID of malware is `5348`.
 <p align="center">
-  <img src="./Assets/Image 3 - Verify revil ransomware.webp" alt="Verify revil ransomware" /> <br />
+  <img src="./Assets/Image 3 - Verify revil ransomware.png" alt="Verify revil ransomware" /> <br />
   <em>Image 2: Verify revil ransomware</em>
 </p>
 
@@ -86,7 +86,7 @@ Moreover, after research and know the command `powershell -e <string>` is base64
 
 Then at about `04:09:50.852 PM`, the malicious file was running (`event.code=7`).
 <p align="center">
-  <img src="./Assets/Image 4 - Malicious loaded file.webp" alt="Malicious loaded file" /> <br />
+  <img src="./Assets/Image 4 - Malicious loaded file.png" alt="Malicious loaded file" /> <br />
   <em>Image 4: Malicious loaded file</em>
 </p>
 
@@ -96,7 +96,7 @@ With `event.code=5`, at about `04:11:08.091 PM`, the malware was terminated. But
 
 Finallly, another common tactic is used by malware is connect to C2 server. I use the SHA256 hash above in `tria.ge` to access detail behavioral reports about the malware's activities.
 <p align="center">
-  <img src="./Assets/Image 5 - C2 server.webp" alt="C2 server" /> <br />
+  <img src="./Assets/Image 5 - C2 server.png" alt="C2 server" /> <br />
   <em>Image 5: C2 server</em>
 </p>
 

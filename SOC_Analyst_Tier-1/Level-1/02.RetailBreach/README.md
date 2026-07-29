@@ -7,12 +7,6 @@ Your mission is to investigate the captured network traffic to determine the nat
 - **Category**: Network Forensics
 - **Tools**: Wireshark
 
-Code sample for image:
-<p align="center">
-  <img src="./Assets/abc.png" alt="abc" /> <br />
-  <em>Image 1: abc</em>
-</p>
-
 ## Overview
 (Conclude your report with a summary of the main finding of you analysis --> 5 Ws: Who, What, When, Where, Why)
 

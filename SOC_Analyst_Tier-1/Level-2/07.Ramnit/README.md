@@ -15,18 +15,18 @@ The malicious process `ChromeSetup.exe` connect to C2 server `58.64.204.181` tha
 
 First, I check with plugin `windows.pslist`. But it seems nothing suspicious. So I check for command line information. Almost the processes run through "system32" folder, quite legitimate. There is only 2 process `OneDrive.exe` (PID 7780) and `ChromeSetup.exe` (PID 4628) run under user `Alex` permission.
 <p align="center">
-  <img src="./Assets/Image 1 - Suspicious processes.webp" alt="Suspicious processes" /> <br />
+  <img src="./Assets/Image 1 - Suspicious processes.png" alt="Suspicious processes" /> <br />
   <em>Image 1: Suspicious processes</em>
 </p>
 
 I want to verify these files, so I use plugin `windows.dumpfiles` to know full name of these files. So, the full name file. And from that, I can have its SHA256 hash value 
 <p align="center">
-  <img src="./Assets/Image 2.1 - Full name file of ChromeSetup.exe.webp" alt="Full name file of ChromeSetup.exe" /> <br />
-  <img src="./Assets/Image 2.2 - Full name file of OneDrive.exe.webp" alt="Full name file of OneDrive.exe" /> <br />
+  <img src="./Assets/Image 2.1 - Full name file of ChromeSetup.exe.png" alt="Full name file of ChromeSetup.exe" /> <br />
+  <img src="./Assets/Image 2.2 - Full name file of OneDrive.exe.png" alt="Full name file of OneDrive.exe" /> <br />
   <em>Image 2: Full namefile of processes</em>
 </p>
 <p align="center">
-  <img src="./Assets/Image 3 - SHA256 hash value of 2 files.webp" alt="SHA256 hash value of 2 files" /> <br />
+  <img src="./Assets/Image 3 - SHA256 hash value of 2 files.png" alt="SHA256 hash value of 2 files" /> <br />
   <em>Image 3: SHA256 hash value of 2 files</em>
 </p>
 
@@ -40,8 +40,8 @@ I want to verify these files, so I use plugin `windows.dumpfiles` to know full n
 
 Then I check these hash in VirusTotal to verify malicious files.
 <p align="center">
-  <img src="./Assets/Image 4.1 - Verify malicious ChromeSetup.exe.webp" alt="Verify malicious ChromeSetup.exe" /> <br />
-  <img src="./Assets/Image 4.2 - Verify malicious OneDrive.exe.webp" alt="Verify malicious OneDrive.exe" /> <br />
+  <img src="./Assets/Image 4.1 - Verify malicious ChromeSetup.exe.png" alt="Verify malicious ChromeSetup.exe" /> <br />
+  <img src="./Assets/Image 4.2 - Verify malicious OneDrive.exe.png" alt="Verify malicious OneDrive.exe" /> <br />
   <em>Image 4: Verify malicious files</em>
 </p>
 
@@ -51,8 +51,8 @@ Then I want to know more information about these 2 files, so I check for plugin 
 
 Then I check for `windows.netscan` to find whether malicious process connect to C2 server or not.
 <p align="center">
-  <img src="./Assets/Image 5.1 - Malicious connect to C2 Server.webp" alt="Malicious connect to C2 Server" /> <br />
-  <img src="./Assets/Image 5.2 - Malicious IP information.webp" alt=" Malicious IP information" /> <br />
+  <img src="./Assets/Image 5.1 - Malicious connect to C2 Server.png" alt="Malicious connect to C2 Server" /> <br />
+  <img src="./Assets/Image 5.2 - Malicious IP information.png" alt=" Malicious IP information" /> <br />
   <em>Image 5: Malicious connect to C2 Server</em>
 </p>
 
@@ -84,7 +84,7 @@ From VirusTotal, SHA1 hash value of `ChromeSetup.exe` is `280c9d36039f9432433893
 
 From VirusTotal, the compilation timestamp for the malware is `2019-12-01 08:36:04 UTC`.
 <p align="center">
-  <img src="./Assets/Image 6 - Compilation timestamp of malware.webp" alt="Compilation timestamp of malware" /> <br />
+  <img src="./Assets/Image 6 - Compilation timestamp of malware.png" alt="Compilation timestamp of malware" /> <br />
   <em>Image 6: Compilation timestamp of malware</em>
 </p>
 
@@ -92,7 +92,7 @@ From VirusTotal, the compilation timestamp for the malware is `2019-12-01 08:36:
 
 From VirusTotal, the malicious file connect to 4 domains.
 <p align="center">
-  <img src="./Assets/Image 7 - Malicious file connect to domain.webp" alt="Malicious file connect to domain" /> <br />
+  <img src="./Assets/Image 7 - Malicious file connect to domain.png" alt="Malicious file connect to domain" /> <br />
   <em>Image 7: Malicious file connect to domain</em>
 </p>
 
