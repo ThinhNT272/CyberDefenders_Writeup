@@ -8,7 +8,10 @@ Analyze the provided PCAP file using the network analysis tools available to you
 - **Tools**: Wireshark
 
 ## Overview
-(Conclude your report with a summary of the main finding of you analysis --> 5 Ws: Who, What, When, Where, Why)
+
+On May 31, 2024, an attacker operating from IP `210.106.114.183` targeted an Ubuntu web server running Apache/2.4.58 and MySQL database services. At `11:47:05`, the attacker initiated network scanning using Nmap NSE scripts, discovering exposed services including MySQL on port `3306`. Between `11:50` and `11:51`, the attacker ran `gobuster` to discover web directories. At `11:55`, the attacker exploited an XML External Entity (XXE) vulnerability in `/review/upload.php` by uploading `TheGreatGatsby.xml`, extracting system account information from `/etc/passwd`.
+
+The attacker continued exfiltrating files by uploading `1984.xml` at `12:01`, followed by `ToKillaMockingbird.xml` at `12:03`. This third XML file successfully read the database configuration file `config.php`, leaking database credentials (`webuser`:`Winter2024`). At `12:08`, the attacker used these compromised credentials to connect directly to the MySQL database on port `3306`. At `12:15`, the attacker uploaded a fourth XML file `PrideandPrejudice.xml` to drop a PHP webshell named `booking.php`. From `12:19` to `12:29`, the attacker executed system commands through `booking.php` for remote code execution and persistence before traffic capture ended at `12:29:12`.
 
 # Analysis
 

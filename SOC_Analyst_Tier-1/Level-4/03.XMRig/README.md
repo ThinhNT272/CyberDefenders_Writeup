@@ -7,14 +7,11 @@ You received a disk image from one of the affected servers for forensic analysis
 - **Category**: Endpoint Forensics
 - **Tools**: Linux CLI, VirusTotal
 
-Code sample for image:
-<p align="center">
-  <img src="./Assets/abc.png" alt="abc"/><br/>
-  <em>Image 1: abc</em>
-</p>
-
 ## Overview
-(Conclude your report with a summary of the main finding of you analysis --> 5 Ws: Who, What, When, Where, Why)
+
+On October 28, 2024, an attacker moving laterally from internal IP `192.168.19.147` compromised a Linux server running Ubuntu. Starting at `14:46`, the attacker initiated SSH brute-force attacks targeting the `root` account and later the `ubuntu` account. At `15:08`, the attacker successfully authenticated via SSH as the `ubuntu` user. During an active SSH session up to `15:35`, the attacker created a backdoor account named `noah` (`sudo adduser noah`) and granted it elevated privileges (`sudo usermod -aG sudo noah`).
+
+To maintain privileged access without password prompts, the attacker disabled tty tickets in `/etc/sudoers` (`echo 'Defaults !tty_tickets' >> /etc/sudoers`). The attacker then downloaded an XMRig cryptocurrency miner (`backup.elf`, original file name `xmr_linux_amd64 (3)`, MD5 `d25208063842ebf39e092d55e033f9e2`) from external IP `3.28.195.43` (`http://3.28.195.43/Tools/backup/backup.elf`) into `/tmp/backup.elf`. The attacker configured persistence by adding a crontab entry (`0 * * * * /tmp/backup.elf >/dev/null 2>&1`) to execute the miner hourly. Additionally, sensitive files including `passwd.txt`, `shadow.txt`, and `sudoers.txt` were exfiltrated to `/home/ubuntu/` on `3.28.195.43`. Before terminating the session with `exit`, the attacker attempted to erase evidence by deleting `.bash_history` and `/var/log/auth.log`.
 
 # Analysis
 

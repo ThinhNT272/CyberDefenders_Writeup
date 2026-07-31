@@ -5,14 +5,11 @@ As a member of the DFIR team at SecuTech, you're tasked with investigating a sec
 - **Category**: Endpoint Forensics
 - **Tools**: MemProFS, VirusTotal
 
-Code sample for image:
-<p align="center">
-  <img src="./Assets/abc.png" alt="abc"/><br/>
-  <em>Image 1: abc</em>
-</p>
-
 ## Overview
-(Conclude your report with a summary of the main finding of you analysis --> 5 Ws: Who, What, When, Where, Why)
+
+On October 4, 2024, a Windows endpoint was compromised by Andromeda (Gamarue) bot malware deployed by threat actor APT group Turla (UNC4210) via a removable USB drive. At `13:48:00`, a malicious USB device with serial number `7095411056659025437&0` was inserted into the target host. At `13:49:48`, PowerShell commands were executed to disable Windows Defender protection features.
+
+At `13:49:53`, immediately after security controls were disabled, the attacker launched the main malicious executable `E:\hidden\Trusted Installer.exe` (MD5 `BC76BD7B332AA8F6AEDBB8E11B7BA9B6`) directly from the USB drive. The executable dropped and executed `Sahofivizu.exe` (MD5 `7FE00CC4EA8429629AC0AC610DB51993`) along with secondary DLL artifacts, such as `C:\Users\Tomy\AppData\Local\Temp\Gozekeneka.dll`. Following initial execution, the Andromeda bot established Command and Control (C2) communication with `http://anam0rph.su/in.php` to receive commands and download additional malware components.
 
 # Analysis
 

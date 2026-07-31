@@ -8,7 +8,10 @@ As part of the investigation, You are provided with a packet capture (PCAP) of t
 - **Tools**: Wireshark, Scamalytics
 
 ## Overview
-(Conclude your report with a summary of the main finding of you analysis --> 5 Ws: Who, What, When, Where, Why)
+
+On June 30, 2024, an attacker operating from IP address `23.158.56.196` targeted an internal web server (`172.31.25.119`) running JetBrains TeamCity version `2023.11.3`. Between `07:57` and `08:01`, the attacker attempted SSH brute-force attacks against the server, but all attempts failed. At `08:02`, the attacker changed tactics and exploited an authentication bypass vulnerability (`CVE-2024-27198`) using the URI `/hax?jsp=/app/rest/server;.jsp`. This allowed the attacker to bypass authentication, create an admin account named `c91oyemw` (password `CL5vzdwLuK`), and log into the server.
+
+Immediately after accessing the system at `08:02`, the attacker uploaded a malicious file named `NSt8bHTg.zip` via `pluginUpload.html` to deploy a webshell. From `08:03` to `08:19`, the attacker executed system commands through the webshell to conduct reconnaissance. During this phase, the attacker modified stored credentials in `/tmp/Creds.txt` to `a1l4m:youarecompromised` (MITRE ATT&CK T1565.001) and attempted a container escape using Docker commands (`docker run --rm -it -v /:/host ubuntu chroot /host`), which failed before network traffic recording ended at `08:26:30`.
 
 # Analysis
 

