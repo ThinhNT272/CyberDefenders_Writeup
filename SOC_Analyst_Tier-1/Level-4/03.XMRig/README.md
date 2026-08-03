@@ -227,6 +227,7 @@ Oct 28 15:02:47 inuxserver sshd[2050]: Failed password for ubuntu from 192.168.1
 ```
 
 Based on the result above, the first username the attacker targeted in these brute-force attempts is `root` at about `14:46` in `28/10`.
+
 # Answer the Questions
 
 **Q1: Assigning high-level privileges to a new user is essential in the attack chain, as it enables the attacker to execute commands with administrative access, ensuring persistent control over the system. What command did the attacker use to grant elevated privileges to the newly created user?**
