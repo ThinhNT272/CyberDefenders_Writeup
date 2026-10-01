@@ -3,7 +3,7 @@
 This server has been flagged for making outbound connections to multiple suspicious IPs. In response, you initiate the standard incident response protocol, which includes isolating the server from the network to prevent potential lateral movement or data exfiltration and obtaining a packet capture from the NSM utility for analysis. Your task is to analyze the pcap and assess for signs of malicious activity.
 
 - **Category**: Network Forensics
-- **Tools**: Wireshark
+- **Tools**: Wireshark, VirusTotal, Hybrid Analysis
 
 ## Overview
 
@@ -38,7 +38,7 @@ Then suddenly, the service with IP `134.209.197.3` request to GET a file `invoic
   <em>Image 3: Download a malicious file</em>
 </p>
 
-The malicious file `invoice.xml` contains the command that dowload a file `docker` from `128.199.52.72` and store file in `/tmp/` folder. After researching, I know that file XML configuration file is automatically ead and execute when the `Apache ActiveMQ Classic` server start up.
+The malicious file `invoice.xml` contains the command that dowload a file `docker` from `128.199.52.72` and store file in `/tmp/` folder. After researching, I know that file XML configuration file is automatically read and execute when the `Apache ActiveMQ Classic` server start up.
 
 I also check this docker file and Windowd Defender flagged the file as backdoor.
 <p align="center">
@@ -46,7 +46,38 @@ I also check this docker file and Windowd Defender flagged the file as backdoor.
   <em>Image 4: Windows Defender detect the malware</em>
 </p>
 
-However, I cannot see the content of the malware.
+However I cannot see the content of the malware, I still have the hash of the malware.
+```SPL
+$ file docker
+docker: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, no section header
+
+$ sha256sum docker
+bb9af7d0d210754cbb6323cde3dbfbc38d666739472a9abd2d99d99dda50b84d  docker
+```
+
+Then I use the hash above to check in VirusTotal to get some information about the malware.
+<p align="center">
+  <img src="./Assets/Image 5 - Verify malware.png" alt="Verify malware" /> <br />
+  <em>Image 5: Verify malware</em>
+</p>
+
+The malware can connect to some IP and Domain below.
+<p align="center">
+  <img src="./Assets/Image 6.1 - Malware connect to IP.png" alt="Malware connect to IP" /> <br />
+  <img src="./Assets/Image 6.2 - Malware connect to domain.png" alt="Malware connect to domain" /> <br />
+  <em>Image 6: Malware connect to C2</em>
+</p>
+
+Moreover, there are some techniques that the malware applied.
+
+| ATT&CK ID | Name                            | Tactics             |
+| --------- | ------------------------------- | ------------------- |
+| T1027     | Obfuscated Files or Information | Defense Evasion     |
+| T1071.001 | Web Protocols                   | Command and Control |
+| T1071.004 | DNS                             | Command and Control |
+| T1573     | Encrypted Channel               | Command and Control |
+| T1106     | Native API                      | Execution           |
+
 # Answer the Questions
 
 **Q1: By identifying the C2 IP, we can block traffic to and from this IP, helping to contain the breach and prevent further data exfiltration or command execution. Can you provide the IP of the C2 server that communicated with our server?**
@@ -84,8 +115,8 @@ The Java OpenWire protocol marshaller is vulnerable to Remote Code Execution. Th
 **Q8: The vendor addressed the vulnerability by adding a [validation step](https://github.com/apache/activemq/pull/1098/commits/3eaf3107f4fb9a3ce7ab45c175bfaeac7e866d5b) to ensure that only valid `Throwable` classes can be instantiated, preventing exploitation. In which Java class and method was this validation step added?**
 
 <p align="center">
-  <img src="./Assets/Image 5 - Validation step.png" alt="Validation step" /> <br />
-  <em>Image 5: Validation step</em>
+  <img src="./Assets/Image 7 - Validation step.png" alt="Validation step" /> <br />
+  <em>Image 7: Validation step</em>
 </p>
 
 The answer is `BaseDataStreamMarshaller.createThrowable`.
